@@ -1,24 +1,23 @@
 package view;
 
-
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import view.panels.ProductOverviewPane;
+import javafx.scene.layout.Pane;
 
 public class KassaMainPane extends BorderPane {
-	public KassaMainPane(){
-		
-	    TabPane tabPane = new TabPane(); 	    
-        Tab kassaTab = new Tab("Kassa");
-        ProductOverviewPane productOverviewPane = new ProductOverviewPane();
-        Tab artikelTab = new Tab("Artikelen",productOverviewPane);
-        Tab instellingTab = new Tab("Instellingen");
+    public KassaMainPane(Pane kassaTab, Pane artikelTab, Pane instellingTab){
+        TabPane tabPane = new TabPane();
+        Tab kassasTab = new Tab("Kassa", kassaTab);
+        Tab artikelsTab = new Tab("Artikelen", artikelTab);
+        Tab instellingsTab = new Tab("Instellingen", instellingTab);
         Tab logTab = new Tab("Log");
-        tabPane.getTabs().add(kassaTab);
-        tabPane.getTabs().add(artikelTab);
-        tabPane.getTabs().add(instellingTab);
+
+        tabPane.getTabs().add(kassasTab);
+        tabPane.getTabs().add(artikelsTab);
+        tabPane.getTabs().add(instellingsTab);
         tabPane.getTabs().add(logTab);
-	    this.setCenter(tabPane);
-	}
+
+        this.setCenter(tabPane);
+    }
 }
