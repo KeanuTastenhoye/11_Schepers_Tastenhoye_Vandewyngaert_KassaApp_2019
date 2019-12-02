@@ -22,7 +22,7 @@ public class Service extends Observable {
         String keuze = null;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\KTAST\\OneDrive\\Documenten\\School\\4e Jaar\\Semester 1\\OOO\\Project\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\opslagStrategieProperties"));
+            BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\opslagStrategieProperties"));
 
             while ((lijn = reader.readLine()) != null) {
                 if (lijn.charAt(0) != '#') {
