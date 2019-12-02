@@ -14,15 +14,17 @@ import javafx.scene.layout.HBox;
 import jxl.read.biff.BiffException;
 
 import domain.Artikel;
+import model.observer.Observer;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class KlantTab extends GridPane {
+public class KlantTab extends GridPane implements Observer {
     private TableView table;
     private HBox hbox;
     private ArtikelController artikelController;
+    private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
 
     public KlantTab(ArtikelController controller) throws BiffException, IOException {
         this.artikelController = controller;
@@ -51,5 +53,14 @@ public class KlantTab extends GridPane {
 
         this.add(table, 0, 4, 2, 2);
         this.add(hbox, 0, 2, 1, 1);
+    }
+
+    @Override
+    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
+        this.artikelNr = artikelNr;
+        this.artikelNaam = artikelNaam;
+        this.artikelGroep = artikelGroep;
+        this.artikelPrijs = artikelPrijs;
+        this.artikelVoorraad = artikelVoorraad;
     }
 }

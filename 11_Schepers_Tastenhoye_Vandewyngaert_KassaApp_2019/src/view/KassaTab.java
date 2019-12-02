@@ -9,14 +9,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import model.observer.Observer;
 
-public class KassaTab extends GridPane {
+public class KassaTab extends GridPane implements Observer {
     private ArtikelController artikelController;
     private TableView table;
+    private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
 
     public KassaTab() {
         this.artikelController = new ArtikelController();
-        //artikelController.registerObserver(this);
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -63,7 +64,6 @@ public class KassaTab extends GridPane {
 
                         table = new TableView<String>();
                         table.setPrefWidth(REMAINING);
-                        //update();
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke));
                         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
                         table.getSortOrder().add(artikelNaam);
@@ -175,5 +175,14 @@ public class KassaTab extends GridPane {
                 }
             }
         });
+    }
+
+    @Override
+    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
+        this.artikelNr = artikelNr;
+        this.artikelNaam = artikelNaam;
+        this.artikelGroep = artikelGroep;
+        this.artikelPrijs = artikelPrijs;
+        this.artikelVoorraad = artikelVoorraad;
     }
 }
