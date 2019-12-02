@@ -43,23 +43,25 @@ public class Service extends Observable {
     //Maakt van de Arraylist<ArrayList<String>> een List<Artikel> voor de observableList
     public List<Artikel> getArtikels() throws BiffException, IOException {
         LoadSaveFactory fact = new LoadSaveFactory();
-        ArrayList<ArrayList<String>> art = new ArrayList<>();
+        ArrayList<Artikel> art = new ArrayList<Artikel>();
         List<Artikel> lijst = new ArrayList<>();
 
-        art = fact.maakLoadSaveStrategie(getStrategy()).load(fact.getCorrectFile());
+        art = fact.maakLoadSaveStrategie(getStrategy()).load(fact.getCorrectFile().toString());
 
-        for (int i = 0; i < art.size(); i++) {
+        /*for (int i = 0; i < art.size(); i++) {
             Artikel artikel = new Artikel();
 
-            artikel.setArtikelNr(art.get(i).get(0));
-            artikel.setArtikelNaam(art.get(i).get(1));
-            artikel.setArtikelGroep(art.get(i).get(2));
-            artikel.setArtikelPrijs(art.get(i).get(3));
-            artikel.setArtikelVoorraad(art.get(i).get(4));
+             artikel.setArtikelNr(art.get(i).getArtikelNr());
+            artikel.setArtikelNaam(art.get(i).getArtikelNaam());
+            artikel.setArtikelGroep(art.get(i).getArtikelGroep());
+            artikel.setArtikelPrijs(art.get(i).getArtikelPrijs());
+            artikel.setArtikelVoorraad(art.get(i).getArtikelVoorraad());
 
             lijst.add(artikel);
-        }
+        }*/
 
-        return lijst;
+
+
+        return art;
     }
 }

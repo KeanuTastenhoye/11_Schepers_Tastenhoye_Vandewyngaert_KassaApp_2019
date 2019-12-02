@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface LoadSave {
 
-    ArrayList<Artikel> load() throws BiffException, IOException;
+    ArrayList<Artikel> load(String file) throws BiffException, IOException;
 
-    void save( ArrayList <Artikel> artikels) throws BiffException, IOException, RowsExceededException, WriteException;
+    void save( ArrayList <Artikel> artikels,String file) throws BiffException, IOException, RowsExceededException, WriteException;
 }

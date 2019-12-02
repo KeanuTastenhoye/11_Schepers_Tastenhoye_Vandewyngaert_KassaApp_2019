@@ -26,7 +26,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
     }
 
     @Override
-    public ArrayList<Artikel> load() throws IOException, BiffException {
+    public ArrayList<Artikel> load(String file) throws IOException, BiffException {
         /*File file = new File("artikel.txt");
         ArrayList<Artikel> artikels = new ArrayList();
         Scanner scannerFile = new Scanner(file);  		// scanner voor File
@@ -46,11 +46,11 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
             System.out.println(artikel.getArtikelNaam());
         }
         return artikels;*/
-        return strategy.load();
+        return strategy.load(file);
     }
 
     @Override
-    public void save(ArrayList<Artikel> artikels) throws DomainException, WriteException, IOException, BiffException {
+    public void save(ArrayList<Artikel> artikels,String file) throws DomainException, WriteException, IOException, BiffException {
 
         /*File file = new File("artikel.txt");
         try {
@@ -63,7 +63,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
         }  catch (FileNotFoundException ex) {
             throw new DomainException("Fout bij het wegschrijven", ex);
         }*/
-        strategy.save(artikels);
+        strategy.save(artikels,file);
 
     }
 

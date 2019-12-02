@@ -1,5 +1,6 @@
 package database;
 
+import domain.Artikel;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
@@ -25,11 +26,11 @@ public class ExcelLezer implements LoadSave {
 
     //Stuurt naar de ExcelPugin om de excel te lezen
     @Override
-    public ArrayList<ArrayList<String>> load(File file) throws BiffException, IOException {
-        ArrayList<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public ArrayList<Artikel> load(File file) throws BiffException, IOException {
+        ArrayList<Artikel> info = new ArrayList<>();
         file = fact.getCorrectFile();
 
-        info = excel.read(file);
+        info = (ArrayList<Artikel>) excel.read(file);
 
         return info;
     }

@@ -64,7 +64,7 @@ public class KassaTab extends GridPane {
                         table = new TableView<String>();
                         table.setPrefWidth(REMAINING);
                         //update();
-                        table.setItems(artikelController.getVerkoopObservable(artikelNrke));
+                        table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
                         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
                         table.getSortOrder().add(artikelNaam);
 

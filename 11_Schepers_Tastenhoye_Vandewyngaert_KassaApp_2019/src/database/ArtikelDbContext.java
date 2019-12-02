@@ -2,11 +2,10 @@ package database;
 
 import domain.Artikel;
 import domain.DomainException;
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.WriteAbortedException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,15 +17,15 @@ public class ArtikelDbContext {
         this.strategy = strategy;
     }
 
-    public void saveProducts(ArrayList<Artikel> artikels) throws DomainException {
+    public void saveProducts(ArrayList<Artikel> artikels,String file) throws DomainException, BiffException, IOException, WriteException {
 
-        strategy.save(artikels);
+        strategy.save(artikels,file);
 
     }
 
-    public ArrayList<Artikel> loadProducts() throws DomainException, FileNotFoundException {
+    public ArrayList<Artikel> loadProducts(String file) throws DomainException, IOException, BiffException {
 
-        return strategy.load();
+        return strategy.load(file);
     }
 
 

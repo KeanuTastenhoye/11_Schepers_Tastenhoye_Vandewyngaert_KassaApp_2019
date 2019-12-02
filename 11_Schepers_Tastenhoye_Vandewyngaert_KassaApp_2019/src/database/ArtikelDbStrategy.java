@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public interface ArtikelDbStrategy {
 
 
-    ArrayList<Artikel> load() throws IOException, BiffException;
-    void save(ArrayList<Artikel> artikels) throws DomainException, WriteException, IOException, BiffException;
+    ArrayList<Artikel> load(String file) throws IOException, BiffException;
+    void save(ArrayList<Artikel> artikels,String file) throws DomainException, WriteException, IOException, BiffException;
 
 }
