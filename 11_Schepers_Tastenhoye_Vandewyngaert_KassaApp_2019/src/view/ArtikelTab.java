@@ -10,12 +10,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 import jxl.read.biff.BiffException;
+import model.observer.Observer;
 
 import java.io.IOException;
 
-public class ArtikelTab extends GridPane {
+public class ArtikelTab extends GridPane implements Observer {
     private TableView table;
     private ArtikelController artikelController;
+    private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
 
     public ArtikelTab(ArtikelController artikelController) throws BiffException, IOException {
         this.artikelController = artikelController;
@@ -44,5 +46,14 @@ public class ArtikelTab extends GridPane {
         table.getSortOrder().add(artikelNaam);
 
         this.add(table, 0, 1, 2, 6);
+    }
+
+    @Override
+    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
+        this.artikelNr = artikelNr;
+        this.artikelNaam = artikelNaam;
+        this.artikelGroep = artikelGroep;
+        this.artikelPrijs = artikelPrijs;
+        this.artikelVoorraad = artikelVoorraad;
     }
 }

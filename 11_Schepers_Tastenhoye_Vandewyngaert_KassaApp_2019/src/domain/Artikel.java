@@ -1,11 +1,17 @@
 package domain;
 
-public class Artikel {
+import model.observer.Observable;
+import model.observer.Observer;
+
+import java.util.ArrayList;
+
+public class Artikel implements Observable {
     private String artikelNr;
     private String artikelNaam;
     private String artikelGroep;
     private String artikelPrijs;
     private String artikelVoorraad;
+    private ArrayList<Observer> observers;
 
     //Constructors
     public Artikel(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
@@ -14,6 +20,7 @@ public class Artikel {
         setArtikelGroep(artikelGroep);
         setArtikelPrijs(artikelPrijs);
         setArtikelVoorraad(artikelVoorraad);
+        observers = new ArrayList<Observer>();
     }
 
     public Artikel(String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
@@ -21,11 +28,13 @@ public class Artikel {
         setArtikelGroep(artikelGroep);
         setArtikelPrijs(artikelPrijs);
         setArtikelVoorraad(artikelVoorraad);
+        observers = new ArrayList<Observer>();
     }
 
     public Artikel(String artikelNaam, String artikelPrijs) {
         setArtikelNaam(artikelNaam);
         setArtikelPrijs(artikelPrijs);
+        observers = new ArrayList<Observer>();
     }
 
     public Artikel() {
@@ -53,6 +62,8 @@ public class Artikel {
         return artikelVoorraad;
     }
 
+    public ArrayList<Observer> getObservers() { return observers; }
+
     //Setters
     public void setArtikelNr(String artikelNr) {
         this.artikelNr = artikelNr;
@@ -72,6 +83,26 @@ public class Artikel {
 
     public void setArtikelVoorraad(String artikelVoorraad) {
         this.artikelVoorraad = artikelVoorraad;
+    }
+
+    //Observer methodes
+    @Override
+    public void addObserver(Observer o) { observers.add(o); }
+
+    @Override
+    public void removeObserver(Observer o) {
+        int i = observers.indexOf(o);
+        if (i >= 0) {
+            observers.remove(i);
+        }
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (int i = 0; i < observers.size(); i++) {
+            Observer observer = (Observer) observers.get(i);
+            observer.update(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
+        }
     }
 
     //Andere methodes
