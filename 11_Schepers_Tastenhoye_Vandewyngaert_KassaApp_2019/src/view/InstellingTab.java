@@ -1,5 +1,6 @@
 package view;
 
+import database.Methode;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -13,6 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import database.PropertySchrijver;
+
+import java.lang.reflect.Method;
 
 public class InstellingTab extends GridPane {
     private PropertySchrijver schrijver;
@@ -42,12 +45,12 @@ public class InstellingTab extends GridPane {
         knop.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String keuze = null;
+                Methode keuze = null;
 
                 if (tekstButton.isSelected()) {
-                    keuze = "Tekst";
+                    keuze = Methode.TEXT;
                 } else {
-                    keuze = "Excel";
+                    keuze = Methode.EXCEL;
                 }
 
                 schrijver.write(keuze);

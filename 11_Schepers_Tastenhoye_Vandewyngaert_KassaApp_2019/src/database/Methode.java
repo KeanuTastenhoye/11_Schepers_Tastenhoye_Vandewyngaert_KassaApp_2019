@@ -1,8 +1,8 @@
 package database;
 
 public enum Methode {
-    TEXT ("Text", "database.TekstLezer"),
-    EXCEL ("Excel", "database.ExcelPugin");
+    TEXT("Text", "database.TekstLezer"),
+    EXCEL("Excel", "database.ExcelPugin");
 
     private final String naam;
     private final String klasseNaam;

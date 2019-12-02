@@ -1,5 +1,6 @@
 package database;
 
+import domain.Artikel;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public interface LoadSave {
 
-    ArrayList<ArrayList<String>> load(File file) throws BiffException, IOException;
+    ArrayList<Artikel> load() throws BiffException, IOException;
 
-    void save(File file, ArrayList<ArrayList<String>> args) throws BiffException, IOException, RowsExceededException, WriteException;
+    void save( ArrayList <Artikel> artikels) throws BiffException, IOException, RowsExceededException, WriteException;
 }
