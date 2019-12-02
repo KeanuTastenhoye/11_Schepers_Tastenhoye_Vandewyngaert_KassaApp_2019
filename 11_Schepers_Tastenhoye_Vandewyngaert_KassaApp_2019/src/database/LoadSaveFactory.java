@@ -5,14 +5,17 @@ import java.io.File;
 public class LoadSaveFactory {
 
     private Service s = new Service();
-
+    Methode opslagMethode;
     //Maakt de correcte lezer afhankelijk van de strategie
     public LoadSave maakLoadSaveStrategie(String strategie) {
         //LoadSave ls;
         if (strategie.equals("Tekst")) {
+            setOpslagMethode(Methode.TEXT);
             return TekstLezer.getInstance();
+
             //ls = new TekstLezer();
         } else if (strategie.equals("Excel")) {
+            setOpslagMethode(Methode.EXCEL);
             return ExcelLezer.getInstance();
             //ls = new ExcelLezer();
         } else {
@@ -35,5 +38,9 @@ public class LoadSaveFactory {
         }
 
         return file;
+    }
+
+    public void setOpslagMethode(Methode opslagMethode) {
+        this.opslagMethode = opslagMethode;
     }
 }

@@ -7,13 +7,14 @@ import java.util.Properties;
 
 public class PropertySchrijver {
     private Properties property;
+    private Methode methode;
 
     public PropertySchrijver() {
         property = new Properties();}
 
-    public void write(String manier) {
+    public void write(Methode manier) {
         try {
-            property.setProperty("Opslagstrategie", manier);
+            property.setProperty("Opslagstrategie", manier.getNaam());
             File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\opslagStrategieProperties");
             OutputStream out = new FileOutputStream(file);
             property.store(out, "Properties file");
@@ -21,4 +22,7 @@ public class PropertySchrijver {
             e.printStackTrace();
         }
     }
+
+
+
 }
