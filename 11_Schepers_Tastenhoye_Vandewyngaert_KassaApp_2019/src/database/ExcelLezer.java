@@ -34,6 +34,7 @@ import java.util.Map;
 
             ArrayList<ArrayList<String>> reader= excel.read(file);
             HashMap<String ,Artikel> map = new HashMap();
+            ArrayList<Artikel> artikels=new ArrayList<>();
             for (int i=0;i<reader.size();i++) {
 
                 Artikel a = new Artikel(reader.get(i).get(0),reader.get(i).get(1),reader.get(i).get(2)
@@ -44,7 +45,12 @@ import java.util.Map;
 
             ArtikelDbInMemory artikelDB = ArtikelDbInMemory.getInstance();
             artikelDB.setArtikels(map);
-        return ((ArrayList<Artikel>) map.values());
+
+            for(Artikel a:map.values())
+            {
+                artikels.add(a);
+            }
+            return artikels;
         }
 
 
