@@ -33,18 +33,18 @@ public class KlantTab extends GridPane implements Observer {
 
         Label totaalLabel = new Label("Totaal: ");
 
-        TableColumn artikelNaam = new TableColumn<>("Naam");
-        TableColumn artikelAantal = new TableColumn<>("Aantal");
-        TableColumn artikelPrijs = new TableColumn<>("Prijs");
+        TableColumn Naam = new TableColumn<>("Naam");
+        TableColumn Aantal = new TableColumn<>("Aantal");
+        TableColumn Prijs = new TableColumn<>("Prijs");
 
-        artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
-        artikelAantal.setCellValueFactory(new PropertyValueFactory("artikelAantal"));
-        artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
+        Naam.setCellValueFactory(new PropertyValueFactory("Naam"));
+        Aantal.setCellValueFactory(new PropertyValueFactory("Aantal"));
+        Prijs.setCellValueFactory(new PropertyValueFactory("Prijs"));
 
         table = new TableView<String>();
         table.setPrefWidth(REMAINING);
-        table.getColumns().addAll(artikelNaam, artikelAantal, artikelPrijs);
-        table.getSortOrder().add(artikelNaam);
+        table.getColumns().addAll(Naam, Aantal, Prijs);
+        table.getSortOrder().add(Naam);
 
         hbox = new HBox(totaalLabel);
 
@@ -54,12 +54,25 @@ public class KlantTab extends GridPane implements Observer {
 
     @Override
     public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) throws IOException, BiffException {
-        this.artikelNr = artikelNr;
-        this.artikelNaam = artikelNaam;
-        this.artikelGroep = artikelGroep;
-        this.artikelPrijs = artikelPrijs;
-        this.artikelVoorraad = artikelVoorraad;
+        Label totaalLabel = new Label("Totaal: ");
 
+        TableColumn Naam = new TableColumn<>("Naam");
+        TableColumn Aantal = new TableColumn<>("Aantal");
+        TableColumn Prijs = new TableColumn<>("Prijs");
+
+        Naam.setCellValueFactory(new PropertyValueFactory("Naam"));
+        Aantal.setCellValueFactory(new PropertyValueFactory("Aantal"));
+        Prijs.setCellValueFactory(new PropertyValueFactory("Prijs"));
+
+        table = new TableView<String>();
+        table.setPrefWidth(REMAINING);
         table.setItems(artikelController.getKlantObservable());
+        table.getColumns().addAll(Naam, Aantal, Prijs);
+        table.getSortOrder().add(Naam);
+
+        hbox = new HBox(totaalLabel);
+
+        this.add(table, 0, 4, 2, 2);
+        this.add(hbox, 0, 2, 1, 1);
     }
 }

@@ -68,14 +68,14 @@ public class KassaTab extends GridPane implements Observer {
                         //update();
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
 
-                        table.setItems(artikelController.getVerkoopObservable(artikelNrke));
-
                         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
                         table.getSortOrder().add(artikelNaam);
 
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
 
                         HBox hbox2 = new HBox(totaalLabel, bedragLabel);
+
+                        artikelController.doObserver();
 
                         add(hbox2, 0, 3, 1, 1);
                         add(table, 0, 6, 2, 2);
