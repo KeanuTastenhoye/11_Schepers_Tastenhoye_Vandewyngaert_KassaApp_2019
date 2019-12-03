@@ -13,9 +13,12 @@ public abstract class TekstLoadSaveTemplate {
 
     final void bestandOpties(File f, ArrayList<ArrayList<String>> a) throws BiffException, IOException, RowsExceededException, WriteException {
         load(f);
+
         save(a,f);
     }
 
     abstract ArrayList<Artikel> load(File file) throws BiffException, IOException;
     abstract void save( ArrayList<ArrayList<String>> args,File file) throws BiffException, IOException, RowsExceededException, WriteException;
+
+
 }

@@ -24,7 +24,7 @@ public class KlantView {
 
 		ArtikelController artikelController = new ArtikelController();
 
-		KlantTab klant = new KlantTab(artikelController);
+		KlantTab klant = new KlantTab();
 
 		BorderPane borderPane = new KlantMainPane(klant);
 

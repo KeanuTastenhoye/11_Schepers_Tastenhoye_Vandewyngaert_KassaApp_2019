@@ -59,9 +59,6 @@ public class Service extends Observable {
 
             lijst.add(artikel);
         }*/
-
-
-
         return art;
     }
 }

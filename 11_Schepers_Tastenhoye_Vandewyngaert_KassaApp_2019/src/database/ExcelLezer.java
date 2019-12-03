@@ -35,6 +35,7 @@ import java.util.Map;
 
             ArrayList<ArrayList<String>> reader= excel.read(file);
             HashMap<String ,Artikel> map = new HashMap();
+            ArrayList<Artikel> artikels=new ArrayList<>();
             for (int i=0;i<reader.size();i++) {
 
                 Artikel a = new Artikel(reader.get(i).get(0),reader.get(i).get(1),reader.get(i).get(2)
@@ -45,14 +46,19 @@ import java.util.Map;
 
             ArtikelDbInMemory artikelDB = ArtikelDbInMemory.getInstance();
             artikelDB.setArtikels(map);
-        return ((ArrayList<Artikel>) map.values());
+
+            for(Artikel a:map.values())
+            {
+                artikels.add(a);
+            }
+            return artikels;
         }
 
 
     //Stuurt naar de ExcelPlugin om naar de excel te schrijven
     @Override
-    public void save( ArrayList<ArrayList<String>> args,File file) throws BiffException, IOException, RowsExceededException, WriteException {
+    public void save(ArrayList<ArrayList<String>> artikels, File file) throws BiffException, IOException, RowsExceededException, WriteException {
         file = fact.getCorrectFile();
-        excel.write(file, args);
+        excel.write(file, artikels);
     }
 }

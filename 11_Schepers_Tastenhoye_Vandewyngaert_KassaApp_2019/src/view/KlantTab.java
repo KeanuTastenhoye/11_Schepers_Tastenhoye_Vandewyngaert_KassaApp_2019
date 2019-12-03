@@ -25,15 +25,13 @@ public class KlantTab extends GridPane implements Observer {
     private ArtikelController artikelController;
     private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
 
-    public KlantTab(ArtikelController controller) throws BiffException, IOException {
-        this.artikelController = controller;
-        //artikelController.registerObserver(this);
+    public KlantTab() throws BiffException, IOException {
+        this.artikelController = new ArtikelController();
         this.setPadding(new Insets(5,5,5,5));
         this.setVgap(5);
         this.setHgap(5);
 
         Label totaalLabel = new Label("Totaal: ");
-        Label bedragLabel = new Label("");
 
         TableColumn artikelNaam = new TableColumn<>("Naam");
         TableColumn artikelAantal = new TableColumn<>("Aantal");
@@ -44,22 +42,24 @@ public class KlantTab extends GridPane implements Observer {
         artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
 
         table = new TableView<String>();
-
-        hbox = new HBox(totaalLabel, bedragLabel);
-
         table.setPrefWidth(REMAINING);
         table.getColumns().addAll(artikelNaam, artikelAantal, artikelPrijs);
+        table.getSortOrder().add(artikelNaam);
+
+        hbox = new HBox(totaalLabel);
 
         this.add(table, 0, 4, 2, 2);
         this.add(hbox, 0, 2, 1, 1);
     }
 
     @Override
-    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
+    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) throws IOException, BiffException {
         this.artikelNr = artikelNr;
         this.artikelNaam = artikelNaam;
         this.artikelGroep = artikelGroep;
         this.artikelPrijs = artikelPrijs;
         this.artikelVoorraad = artikelVoorraad;
+
+        table.setItems(artikelController.getKlantObservable());
     }
 }
