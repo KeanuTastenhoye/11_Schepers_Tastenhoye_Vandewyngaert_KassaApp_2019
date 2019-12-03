@@ -21,6 +21,7 @@ public class ArtikelController {
     private List<Artikel> nieuweArtikels;
     private List<Artikel> oudeArtikels;
     private List<Artikel> onHold;
+    private List<Artikel> verkoopArtikels;
 
     private double prijs;
     private double onHoldPrijs;
@@ -34,6 +35,7 @@ public class ArtikelController {
         nieuweArtikels = new ArrayList<>();
         oudeArtikels = new ArrayList<>();
         onHold = new ArrayList<>();
+        verkoopArtikels = new ArrayList<>();
 
         this.stage = new Stage();
     }
@@ -56,10 +58,21 @@ public class ArtikelController {
         for (Artikel a: getService().getArtikels()) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
+                verkoopArtikels = artikels;
                 return artikels;
             }
         }
         throw new IllegalArgumentException("Het artikel nummer bestaat niet");
+    }
+
+    public List<Artikel> getVerkoopArtikelsNietDubbel() throws BiffException, IOException {
+        List<Artikel> klantArtikels = new ArrayList<>();
+        for (Artikel a: verkoopArtikels) {
+            if (!klantArtikels.contains(a)) {
+                klantArtikels.add(a);
+            }
+        }
+        return klantArtikels;
     }
 
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
@@ -138,6 +151,26 @@ public class ArtikelController {
         return false;
     }
 
+    public void voorraadOmhoog(String artikelNr) {
+        for (Artikel a: artikels) {
+            if (a.getArtikelNr().equals(artikelNr)) {
+                int vooraad = Integer.parseInt(a.getArtikelVoorraad());
+                vooraad += 1;
+                a.setArtikelVoorraad(Integer.toString(vooraad));
+            }
+        }
+    }
+
+    public void voorraadOmlaag(String artikelNr) {
+        for (Artikel a: artikels) {
+            if (a.getArtikelNr().equals(artikelNr)) {
+                int vooraad = Integer.parseInt(a.getArtikelVoorraad());
+                vooraad -= 1;
+                a.setArtikelVoorraad(Integer.toString(vooraad));
+            }
+        }
+    }
+
     //Observables
     public ObservableList<Artikel> getArtikelObservable() throws BiffException, IOException {
         ObservableList<Artikel> artikels = FXCollections.observableArrayList(getArtikels());
@@ -156,6 +189,11 @@ public class ArtikelController {
 
     public ObservableList<Artikel> getOnHoldObservable() throws BiffException, IOException {
         ObservableList<Artikel> artikels = FXCollections.observableArrayList(getOnHold());
+        return artikels;
+    }
+
+    public ObservableList<Artikel> getKlantObservable() throws BiffException, IOException {
+        ObservableList<Artikel> artikels = FXCollections.observableArrayList(getVerkoopArtikelsNietDubbel());
         return artikels;
     }
 }

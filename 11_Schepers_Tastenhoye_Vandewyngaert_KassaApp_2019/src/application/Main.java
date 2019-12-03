@@ -1,13 +1,14 @@
 package application;
 	
+import controller.ArtikelController;
+import database.ArtikelDbInMemory;
 import database.LoadSaveFactory;
 import database.Service;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import view.KassaView;
-import view.KlantView;
+import view.*;
 
 import java.io.IOException;
 
@@ -25,10 +26,24 @@ public class Main extends Application {
 		//Kijkt naar de Properties file en ziet of het uit een TXT of een XLS bestand moet lezen
 		factory.maakLoadSaveStrategie(service.getStrategy());
 
-		KassaView kassaView = new KassaView();
-		KlantView klantView = new KlantView();
+		ArtikelDbInMemory artikels = new ArtikelDbInMemory();
+
+		KassaTab kassaTab = new KassaTab();
+		ArtikelTab artikelTab= new ArtikelTab();
+		KlantTab klantTab = new KlantTab();
+
+		artikels.addObserver(kassaTab);
+		artikels.addObserver(artikelTab);
+		artikels.addObserver(klantTab);
 	}
-	
+
+	/*
+	private void registerObserversInView() {
+		service.getArtikelDB().registerObserver(articleOverviewPane);
+		service.getOrderDBLocal().registerObserver(orderOverviewPane);
+	}
+	*/
+
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -189,5 +189,7 @@ public class KassaTab extends GridPane implements Observer {
         this.artikelGroep = artikelGroep;
         this.artikelPrijs = artikelPrijs;
         this.artikelVoorraad = artikelVoorraad;
+
+        artikelController.voorraadOmlaag(artikelNr);
     }
 }

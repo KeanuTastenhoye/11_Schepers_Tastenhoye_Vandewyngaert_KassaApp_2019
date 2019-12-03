@@ -18,15 +18,10 @@ public class ArtikelDbContext {
     }
 
     public void saveProducts(ArrayList<Artikel> artikels,String file) throws DomainException, BiffException, IOException, WriteException {
-
         strategy.save(artikels,file);
-
     }
 
     public ArrayList<Artikel> loadProducts(String file) throws DomainException, IOException, BiffException {
-
         return strategy.load(file);
     }
-
-
 }

@@ -17,10 +17,10 @@ import java.io.IOException;
 public class ArtikelTab extends GridPane implements Observer {
     private TableView table;
     private ArtikelController artikelController;
-    private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
+    private String artikelNr, artikelNaam, artikelPrijs, artikelGroep, artikelVoorraad;
 
-    public ArtikelTab(ArtikelController artikelController) throws BiffException, IOException {
-        this.artikelController = artikelController;
+    public ArtikelTab() throws BiffException, IOException {
+        this.artikelController = new ArtikelController();
         this.setPadding(new Insets(5,5,5,5));
         this.setVgap(5);
         this.setHgap(5);
@@ -49,11 +49,8 @@ public class ArtikelTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
-        this.artikelNr = artikelNr;
-        this.artikelNaam = artikelNaam;
-        this.artikelGroep = artikelGroep;
-        this.artikelPrijs = artikelPrijs;
-        this.artikelVoorraad = artikelVoorraad;
+    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) throws IOException, BiffException {
+        //Vul de table opnieuw na voorraad aanpassing van kassaTab
+        table.setItems(artikelController.getArtikelObservable());
     }
 }
