@@ -57,13 +57,17 @@ public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
         return artikels;
     }
 
+
     //Methode om naar de txt te schrijven
     @Override
-    public void save( ArrayList<ArrayList<String>> args, File file) throws BiffException, IOException, RowsExceededException, WriteException {
+
+
+    public void save(ArrayList<ArrayList<String>> args, File file) throws BiffException, IOException, RowsExceededException, WriteException {
+
         file = fact.getCorrectFile();
         PrintWriter writer = new PrintWriter(file, "UTF-8");
 
-        for (ArrayList<String> a: args) {
+        for (ArrayList<String> a : args) {
             writer.println(a);
         }
         writer.close();
