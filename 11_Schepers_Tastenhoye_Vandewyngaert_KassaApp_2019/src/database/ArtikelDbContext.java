@@ -17,11 +17,11 @@ public class ArtikelDbContext {
         this.strategy = strategy;
     }
 
-    public void saveProducts(ArrayList<Artikel> artikels,String file) throws DomainException, BiffException, IOException, WriteException {
+    public void saveProducts(ArrayList<Artikel> artikels, File file) throws DomainException, BiffException, IOException, WriteException {
         strategy.save(artikels,file);
     }
 
-    public ArrayList<Artikel> loadProducts(String file) throws DomainException, IOException, BiffException {
+    public ArrayList<Artikel> loadProducts(File file) throws DomainException, IOException, BiffException {
         return strategy.load(file);
     }
 }

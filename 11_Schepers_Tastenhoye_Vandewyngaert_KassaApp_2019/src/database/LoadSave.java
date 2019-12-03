@@ -13,5 +13,5 @@ public interface LoadSave {
 
     ArrayList<Artikel> load(File file) throws BiffException, IOException;
 
-    void save( ArrayList <Artikel> artikels,String file) throws BiffException, IOException, RowsExceededException, WriteException;
+    void save(ArrayList<ArrayList<String>> artikels, File file) throws BiffException, IOException, RowsExceededException, WriteException;
 }

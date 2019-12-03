@@ -46,7 +46,7 @@ public class Service extends Observable {
         ArrayList<Artikel> art = new ArrayList<Artikel>();
         List<Artikel> lijst = new ArrayList<>();
 
-        art = fact.maakLoadSaveStrategie(getStrategy()).load(fact.getCorrectFile().toString());
+        art = fact.maakLoadSaveStrategie(getStrategy()).load(fact.getCorrectFile());
 
         /*for (int i = 0; i < art.size(); i++) {
             Artikel artikel = new Artikel();
@@ -59,9 +59,6 @@ public class Service extends Observable {
 
             lijst.add(artikel);
         }*/
-
-
-
         return art;
     }
 }

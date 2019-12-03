@@ -15,16 +15,57 @@ import java.util.HashMap;
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     private LoadSave strategy;
+    private volatile static ArtikelDbInMemory uniqueInstance;
     private HashMap<String,Artikel> artikels;
     private ArrayList<Observer> observers;
+
+    public ArtikelDbInMemory() {
+        this.artikels = new HashMap<>();
+        this.observers = new ArrayList<>();
+    }
 
     public void leesIn() throws FileNotFoundException { }
 
     @Override
-    public ArrayList<Artikel> load(String file) throws IOException, BiffException { return strategy.load(file); }
+    public ArrayList<Artikel> load(File file) throws IOException, BiffException { return strategy.load(file); }
+
+    public HashMap<String, Artikel> getArtikels() {
+        return artikels;
+    }
+
+    public void setArtikels(HashMap<String, Artikel> artikels) {
+        this.artikels = artikels;
+    }
+
+    public static ArtikelDbInMemory getInstance() {
+        if (uniqueInstance == null) {
+            synchronized (ArtikelDbInMemory.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new ArtikelDbInMemory();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
 
     @Override
-    public void save(ArrayList<Artikel> artikels,String file) throws DomainException, WriteException, IOException, BiffException { strategy.save(artikels,file); }
+    public void save(ArrayList<Artikel> artikels, File file) throws DomainException, WriteException, IOException, BiffException {
+       ArrayList<ArrayList<String>> saveArtikels = new ArrayList<>();
+       for(Artikel a: artikels)
+       {
+           for(int i=0; i<saveArtikels.size();i++)
+           {
+               saveArtikels.add(new ArrayList<String>());
+               saveArtikels.get(i).add((a.getArtikelNr()));
+               saveArtikels.get(i).add((a.getArtikelNaam()));
+               saveArtikels.get(i).add((a.getArtikelGroep()));
+               saveArtikels.get(i).add((a.getArtikelPrijs()));
+               saveArtikels.get(i).add((a.getArtikelVoorraad()));
+
+           }
+       }
+        strategy.save(saveArtikels, file);
+    }
 
     public Artikel findArtikel(String id) {
         return null;
@@ -45,10 +86,12 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers() throws IOException, BiffException {
         for (int i = 0; i < observers.size(); i++) {
             Observer observer = (Observer) observers.get(i);
-            observer.update(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
+            for (Artikel a: artikels.values()) {
+                observer.update(a.getArtikelNr(), a.getArtikelNaam(), a.getArtikelGroep(), a.getArtikelPrijs(), a.getArtikelVoorraad());
+            }
         }
     }
 }

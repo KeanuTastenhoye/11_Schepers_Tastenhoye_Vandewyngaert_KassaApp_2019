@@ -26,7 +26,7 @@ public class KassaView  {
 		ArtikelController controller = new ArtikelController();
 
 		KassaTab kassa = new KassaTab();
-		ArtikelTab artikel = new ArtikelTab(controller);
+		ArtikelTab artikel = new ArtikelTab();
 		InstellingTab instelling = new InstellingTab();
 
 		BorderPane borderPane = new KassaMainPane(kassa, artikel, instelling);
