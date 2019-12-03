@@ -17,10 +17,30 @@ import java.util.Scanner;
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy {
     private LoadSave strategy;
+private volatile static ArtikelDbInMemory uniqueInstance;
     private HashMap<String,Artikel> artikels;
 
-    public void leesIn() throws FileNotFoundException {
+    public HashMap<String, Artikel> getArtikels() {
+        return artikels;
+    }
 
+    public void setArtikels(HashMap<String, Artikel> artikels) {
+        this.artikels = artikels;
+    }
+
+    public static ArtikelDbInMemory getInstance() {
+
+        if(uniqueInstance==null)
+        {
+            synchronized (ArtikelDbInMemory.class)
+            {
+                if(uniqueInstance==null){
+                    uniqueInstance=new ArtikelDbInMemory();
+
+                }
+            }
+        }
+        return uniqueInstance;
 
 
     }
@@ -48,6 +68,8 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy {
         return artikels;*/
         return strategy.load(file);
     }
+
+
 
     @Override
     public void save(ArrayList<Artikel> artikels,String file) throws DomainException, WriteException, IOException, BiffException {
