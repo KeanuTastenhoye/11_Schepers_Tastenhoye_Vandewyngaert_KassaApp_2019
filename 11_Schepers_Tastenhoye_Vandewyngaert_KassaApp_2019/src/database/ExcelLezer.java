@@ -17,6 +17,7 @@ import java.util.Map;
     private static final ExcelLezer SINGLE_INSTANCE = new ExcelLezer();
     private ExcelPlugin excel;
     private LoadSaveFactory fact;
+    private ArrayList<ArrayList<String>> artikels= new ArrayList<>();
 
 
     private ExcelLezer() {

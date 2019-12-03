@@ -1,5 +1,6 @@
 package database;
 
+import domain.Artikel;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
@@ -10,7 +11,7 @@ import java.util.*;
 public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
 
     private static final TekstLezer SINGLE_INSTANCE = new TekstLezer();
-    private ArrayList<ArrayList<String>> artikels;
+    private ArrayList<Artikel> artikels;
     private LoadSaveFactory fact;
 
     private TekstLezer() {
@@ -24,7 +25,7 @@ public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
 
     //Methode om de txt te lezen
     @Override
-    public ArrayList<ArrayList<String>> load(File file) throws BiffException, IOException {
+    public ArrayList<Artikel> load(File file) throws BiffException, IOException {
         String inhoud;
         file = fact.getCorrectFile();
 
@@ -39,13 +40,13 @@ public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
                 String artikelPrijs = parts[3];
                 String artikelVoorraad = parts[4];
 
-                ArrayList<String> artikel = new ArrayList<>();
+                Artikel artikel = new Artikel();
 
-                artikel.add(artikelNr);
-                artikel.add(artikelNaam);
-                artikel.add(artikelGroep);
-                artikel.add(artikelPrijs);
-                artikel.add(artikelVoorraad);
+                artikel.setArtikelNr(artikelNr);
+                artikel.setArtikelNaam(artikelNaam);
+                artikel.setArtikelGroep(artikelGroep);
+                artikel.setArtikelPrijs(artikelPrijs);
+                artikel.setArtikelVoorraad(artikelVoorraad);
 
                 artikels.add(artikel);
             } else {
@@ -56,9 +57,10 @@ public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
         return artikels;
     }
 
+
     //Methode om naar de txt te schrijven
     @Override
-    public void save(File file, ArrayList<ArrayList<String>> args) throws BiffException, IOException, RowsExceededException, WriteException {
+    public void save( ArrayList<ArrayList<String>> args,File file) throws BiffException, IOException, RowsExceededException, WriteException {
         file = fact.getCorrectFile();
         PrintWriter writer = new PrintWriter(file, "UTF-8");
 
