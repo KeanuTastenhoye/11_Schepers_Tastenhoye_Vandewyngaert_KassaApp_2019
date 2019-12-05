@@ -26,6 +26,7 @@ public class ArtikelController {
     private List<Artikel> oudeArtikels;
     private List<Artikel> onHold;
     private List<Artikel> verkoopArtikels;
+    private List<Artikel> klantArtikels;
 
     private double prijs;
     private double onHoldPrijs;
@@ -40,6 +41,7 @@ public class ArtikelController {
         oudeArtikels = new ArrayList<>();
         onHold = new ArrayList<>();
         verkoopArtikels = new ArrayList<>();
+        klantArtikels = new ArrayList<>();
 
         this.stage = new Stage();
     }
@@ -71,7 +73,6 @@ public class ArtikelController {
     }
 
     public List<Artikel> getVerkoopArtikelsNietDubbel() throws BiffException, IOException {
-        List<Artikel> klantArtikels = new ArrayList<>();
         for (Artikel a: verkoopArtikels) {
             if (!klantArtikels.contains(a)) {
                 klantArtikels.add(a);
@@ -98,10 +99,10 @@ public class ArtikelController {
     }
 
     public double getVerkoopPrijs(String artikelNr) {
-        for (Artikel a: artikels) {
+        for (Artikel a: verkoopArtikels) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 prijs += Double.parseDouble(a.getArtikelPrijs());
-                return prijs;
+                return prijs - onHoldPrijs;
             }
         }
         throw new IllegalArgumentException("Het artikel nummer bestaat niet");
@@ -123,6 +124,7 @@ public class ArtikelController {
 
     public void setOnHold() {
         onHold.addAll(artikels);
+        verkoopArtikels.removeAll(verkoopArtikels);
     }
 
     public void setOnHoldPrijs() {
