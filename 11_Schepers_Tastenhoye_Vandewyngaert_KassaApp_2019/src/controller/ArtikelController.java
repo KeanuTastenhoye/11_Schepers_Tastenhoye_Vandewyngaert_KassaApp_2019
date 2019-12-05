@@ -1,5 +1,6 @@
 package controller;
 
+import database.ArtikelDbInMemory;
 import domain.Artikel;
 import database.Service;
 
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jxl.read.biff.BiffException;
+import view.KassaTab;
+import view.KassaView;
+import view.KlantTab;
 
 public class ArtikelController {
     private final Service service;
@@ -59,6 +63,7 @@ public class ArtikelController {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
                 verkoopArtikels = artikels;
+                System.out.println("Verkoop: " + artikels);
                 return artikels;
             }
         }
@@ -72,6 +77,7 @@ public class ArtikelController {
                 klantArtikels.add(a);
             }
         }
+        System.out.println("Klant: " + klantArtikels);
         return klantArtikels;
     }
 
@@ -170,6 +176,10 @@ public class ArtikelController {
                 a.setArtikelVoorraad(Integer.toString(vooraad));
             }
         }
+    }
+
+    public void doObserver() throws IOException, BiffException {
+        ArtikelDbInMemory.getInstance().notifyObservers();
     }
 
     //Observables
