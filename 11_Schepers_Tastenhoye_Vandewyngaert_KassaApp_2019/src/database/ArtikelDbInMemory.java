@@ -37,6 +37,19 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
         this.artikels = artikels;
     }
 
+    public Artikel getDuurste()
+    {
+        Artikel artikel= null;
+        for(Artikel a: artikels.values())
+        {
+            if(Integer.parseInt(a.getArtikelPrijs())>Integer.parseInt(
+                    artikel.getArtikelPrijs()))
+            {
+                artikel=a;
+            }
+        }
+        return artikel;
+    }
     public static ArtikelDbInMemory getInstance() {
         if (uniqueInstance == null) {
             synchronized (ArtikelDbInMemory.class) {
