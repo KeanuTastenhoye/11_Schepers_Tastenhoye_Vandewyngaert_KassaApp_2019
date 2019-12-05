@@ -26,9 +26,6 @@ public class Main extends Application {
 		//Kijkt naar de Properties file en ziet of het uit een TXT of een XLS bestand moet lezen
 		factory.maakLoadSaveStrategie(service.getStrategy());
 
-		KassaView kav = new KassaView();
-		KlantView klv = new KlantView();
-
 		KassaTab kassaTab = new KassaTab();
 		ArtikelTab artikelTab= new ArtikelTab();
 		KlantTab klantTab = new KlantTab();
@@ -36,6 +33,9 @@ public class Main extends Application {
 		ArtikelDbInMemory.getInstance().addObserver(kassaTab);
 		ArtikelDbInMemory.getInstance().addObserver(artikelTab);
 		ArtikelDbInMemory.getInstance().addObserver(klantTab);
+
+		KassaView kav = new KassaView();
+		KlantView klv = new KlantView();
 	}
 
 	/*
