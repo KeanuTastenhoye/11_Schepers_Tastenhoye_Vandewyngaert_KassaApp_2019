@@ -67,10 +67,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
         strategy.save(saveArtikels, file);
     }
 
-    public Artikel findArtikel(String id) {
-        return null;
-        //todo
-    }
+
 
     public ArrayList<Observer> getObservers() { return observers; }
 

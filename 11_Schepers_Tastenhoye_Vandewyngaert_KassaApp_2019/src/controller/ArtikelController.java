@@ -117,6 +117,7 @@ public class ArtikelController {
 
     public void setOnHold() {
         onHold.addAll(artikels);
+        verkoopArtikels.removeAll(verkoopArtikels);
     }
 
     public void setOnHoldPrijs() {
