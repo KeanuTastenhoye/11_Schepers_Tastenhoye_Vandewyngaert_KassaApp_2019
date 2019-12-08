@@ -14,6 +14,7 @@ import model.observer.Observer;
 public class KassaTab extends GridPane implements Observer {
     private ArtikelController artikelController;
     private TableView table;
+    private int klantNaOnHoldCounter=0;
     private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
 
     public KassaTab() {
@@ -137,10 +138,15 @@ public class KassaTab extends GridPane implements Observer {
         onHold.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                artikelController.setOnHold();
-                artikelController.setOnHoldPrijs();
-                table.getItems().clear();
-                bedragLabel.setText("");
+                if(klantNaOnHoldCounter<3)
+                {
+                    klantNaOnHoldCounter++;
+                    artikelController.setOnHold();
+                    artikelController.setOnHoldPrijs();
+                    table.getItems().clear();
+                    bedragLabel.setText("");
+                }
+
             }
         });
 
@@ -148,6 +154,7 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    klantNaOnHoldCounter=0;
                     table.getItems().clear();
                     bedragLabel.setText("");
                     TableColumn artikelNr = new TableColumn<>("Nr");
