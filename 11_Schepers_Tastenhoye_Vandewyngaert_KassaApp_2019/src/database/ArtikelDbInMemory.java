@@ -2,6 +2,7 @@ package database;
 
 import domain.Artikel;
 import domain.DomainException;
+import javafx.collections.ObservableList;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import model.observer.Observable;
@@ -12,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     private LoadSave strategy;
@@ -96,6 +98,12 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     }
 
     @Override
+    public void notifyObservers(ObservableList<Artikel> klantlist) throws IOException, BiffException {
+        for (Observer o: observers) {
+            o.update(klantlist);
+        }
+    }
+    /*
     public void notifyObservers() throws IOException, BiffException {
         for (int i = 0; i < observers.size(); i++) {
             Observer observer = (Observer) observers.get(i);
@@ -104,4 +112,5 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
             }
         }
     }
+    */
 }

@@ -2,6 +2,8 @@ package view;
 
 import controller.ArtikelController;
 
+import domain.Artikel;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -49,7 +51,7 @@ public class ArtikelTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) throws IOException, BiffException {
+    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         //Vul de table opnieuw na voorraad aanpassing van kassaTab
         table.setItems(artikelController.getArtikelObservable());
     }

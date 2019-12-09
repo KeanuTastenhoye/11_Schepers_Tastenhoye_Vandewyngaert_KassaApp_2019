@@ -2,6 +2,8 @@ package view;
 
 import controller.ArtikelController;
 
+import domain.Artikel;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -190,7 +192,7 @@ public class KassaTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) {
+    public void update(ObservableList<Artikel> klantlist) {
         this.artikelNr = artikelNr;
         this.artikelNaam = artikelNaam;
         this.artikelGroep = artikelGroep;

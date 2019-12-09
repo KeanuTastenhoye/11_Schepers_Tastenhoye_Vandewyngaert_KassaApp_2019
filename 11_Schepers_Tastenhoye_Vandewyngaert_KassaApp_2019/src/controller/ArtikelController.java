@@ -180,7 +180,7 @@ public class ArtikelController {
     }
 
     public void doObserver() throws IOException, BiffException {
-        ArtikelDbInMemory.getInstance().notifyObservers();
+        ArtikelDbInMemory.getInstance().notifyObservers(getKlantObservable());
     }
 
     //Observables

@@ -2,6 +2,7 @@ package view;
 
 import controller.ArtikelController;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -17,6 +18,7 @@ import model.observer.Observer;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class KlantTab extends GridPane implements Observer {
@@ -53,7 +55,7 @@ public class KlantTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(String artikelNr, String artikelNaam, String artikelGroep, String artikelPrijs, String artikelVoorraad) throws IOException, BiffException {
+    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         Label totaalLabel = new Label("Totaal: ");
 
         TableColumn Naam = new TableColumn<>("Naam");

@@ -30,9 +30,11 @@ public class LoadSaveFactory {
         File file;
 
         if (s.getStrategy().equals("Tekst")) {
-            file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.txt");
+            //file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.txt");
+            file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.txt");
         } else if (s.getStrategy().equals("Excel")) {
-            file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.xls");
+            //file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.xls");
+            file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\artikel.xls");
         } else {
             throw new IllegalArgumentException("Niet geimplementeerde strategie");
         }
