@@ -33,6 +33,12 @@ public class Artikel {
         setArtikelPrijs(artikelPrijs);
     }
 
+    public Artikel(String artikelNaam, String artikelVoorraad, String artikelPrijs) {
+        setArtikelNaam(artikelNaam);
+        setArtikelVoorraad(artikelVoorraad);
+        setArtikelPrijs(artikelPrijs);
+    }
+
     public Artikel() {
 
     }

@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 
-    public class ExcelLezer implements LoadSave {
+public class ExcelLezer implements LoadSave {
     private static final ExcelLezer SINGLE_INSTANCE = new ExcelLezer();
     private ExcelPlugin excel;
     private LoadSaveFactory fact;

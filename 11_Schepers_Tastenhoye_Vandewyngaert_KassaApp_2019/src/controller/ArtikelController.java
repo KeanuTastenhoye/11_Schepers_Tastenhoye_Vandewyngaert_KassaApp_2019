@@ -65,7 +65,6 @@ public class ArtikelController {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
                 verkoopArtikels = artikels;
-                System.out.println("Verkoop: " + artikels);
                 return artikels;
             }
         }
@@ -78,7 +77,6 @@ public class ArtikelController {
                 klantArtikels.add(a);
             }
         }
-        System.out.println("Klant: " + klantArtikels);
         return klantArtikels;
     }
 
