@@ -18,11 +18,7 @@ public class KlantTab extends GridPane implements Observer {
         this.setPadding(new Insets(5,5,5,5));
         this.setVgap(5);
         this.setHgap(5);
-    }
 
-    @Override
-    public void update(ObservableList<Artikel> klantlist) {
-        System.out.println("Klant tab klantlist " + klantlist);
         Label totaalLabel = new Label("Totaal: ");
 
         TableColumn Nr = new TableColumn<>("Nr");
@@ -39,7 +35,6 @@ public class KlantTab extends GridPane implements Observer {
 
         table = new TableView<String>();
         table.setPrefWidth(REMAINING);
-        table.setItems(klantlist);
         table.getColumns().addAll(Nr, Naam, Groep, Prijs, Voorraad);
         table.getSortOrder().add(Naam);
 
@@ -47,5 +42,12 @@ public class KlantTab extends GridPane implements Observer {
 
         add(hbox, 0, 2, 1, 1);
         add(table, 0, 4, 2, 2);
+    }
+
+    @Override
+    public void update(ObservableList<Artikel> klantlist) {
+        System.out.println("Klant tab klantlist " + klantlist);
+        table.refresh();
+        table.setItems(klantlist);
     }
 }

@@ -167,8 +167,8 @@ public class ArtikelController {
         }
     }
 
-    public void voorraadOmlaag(String artikelNr) {
-        for (Artikel a: artikels) {
+    public void voorraadOmlaag(String artikelNr) throws IOException, BiffException {
+        for (Artikel a: getArtikels()) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 int vooraad = Integer.parseInt(a.getArtikelVoorraad());
                 vooraad -= 1;

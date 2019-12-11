@@ -11,13 +11,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import jxl.read.biff.BiffException;
 import model.observer.Observer;
+
+import java.io.IOException;
 
 public class KassaTab extends GridPane implements Observer {
     private ArtikelController artikelController;
     private TableView table;
     private int klantNaOnHoldCounter=0;
-    private String artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad;
+    private String artNr;
 
     public KassaTab() {
         this.artikelController = new ArtikelController();
@@ -46,6 +49,7 @@ public class KassaTab extends GridPane implements Observer {
             public void handle(ActionEvent event) {
                 try {
                     String artikelNrke = artikelCodeText.getText();
+                    artNr = artikelNrke;
 
                     if (!artikelController.correctNr(artikelNrke)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -192,13 +196,7 @@ public class KassaTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(ObservableList<Artikel> klantlist) {
-        this.artikelNr = artikelNr;
-        this.artikelNaam = artikelNaam;
-        this.artikelGroep = artikelGroep;
-        this.artikelPrijs = artikelPrijs;
-        this.artikelVoorraad = artikelVoorraad;
-
-        artikelController.voorraadOmlaag(artikelNr);
+    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
+        artikelController.voorraadOmlaag(artNr);
     }
 }
