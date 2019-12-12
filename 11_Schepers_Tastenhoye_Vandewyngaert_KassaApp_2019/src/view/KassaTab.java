@@ -2,7 +2,9 @@ package view;
 
 import controller.ArtikelController;
 
+import database.Methode;
 import domain.Artikel;
+import domain.KortingEnum;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,13 +38,22 @@ public class KassaTab extends GridPane implements Observer {
         Button delete = new Button("Delete");
         Button onHold = new Button("OnHold");
         Button continu = new Button("Continue");
+        Button afsluiten = new Button("Afsluiten");
 
-        HBox hbox1 = new HBox(artikelCodeLabel, artikelCodeText, save, delete, onHold, continu);
 
-        this.add(hbox1, 0, 2, 1, 1);
+        HBox knopjes = new HBox(artikelCodeLabel, artikelCodeText, save, delete, onHold, continu, afsluiten);
+
+        this.add(knopjes, 0, 2, 1, 1);
 
         Label totaalLabel = new Label("Totaal: ");
+
         Label bedragLabel = new Label("");
+        Label koritngTxt = new Label("Korting: ");
+        Label kortingLabel = new Label("");
+        Label versieringLabel = new Label("--------------------------------------");
+        Label eindTotaal = new Label("Te betalen: ");
+
+
 
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -80,12 +91,12 @@ public class KassaTab extends GridPane implements Observer {
 
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
 
-                        HBox hbox2 = new HBox(totaalLabel, bedragLabel);
+                        HBox totaal = new HBox(totaalLabel, bedragLabel);
 
                         artikelController.doObserver();
 
-                        add(hbox2, 0, 3, 1, 1);
-                        add(table, 0, 6, 2, 2);
+                        add(totaal, 0, 3, 1, 1);
+                        add(table, 0, 7, 2, 2);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -130,9 +141,9 @@ public class KassaTab extends GridPane implements Observer {
 
                         bedragLabel.setText(Double.toString(artikelController.getDeleteVerkoopPrijs(artikelNrke)));
 
-                        HBox hbox2 = new HBox(totaalLabel, bedragLabel);
+                        HBox totaal = new HBox(totaalLabel, bedragLabel);
 
-                        add(hbox2, 0, 3, 1, 1);
+                        add(totaal, 0, 3, 1, 1);
                         add(table, 0, 6, 2, 2);
                     }
                 } catch (Exception e) {
@@ -184,13 +195,31 @@ public class KassaTab extends GridPane implements Observer {
 
                     bedragLabel.setText(Double.toString(artikelController.getOnHoldPrijs()));
 
-                    HBox hbox2 = new HBox(totaalLabel, bedragLabel);
+                    HBox totaal = new HBox(totaalLabel, bedragLabel);
 
-                    add(hbox2, 0, 3, 1, 1);
-                    add(table, 0, 6, 2, 2);
+                    add(totaal, 0, 3, 1, 1);
+                    add(table, 0, 7, 2, 2);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        afsluiten.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                kortingLabel.setText("JA WADDE JE HEBT KORTING");
+
+
+
+                HBox korting = new HBox(koritngTxt, kortingLabel);
+                HBox versiering = new HBox(versieringLabel);
+                HBox eindtotaal = new HBox(eindTotaal);
+                add(korting, 0, 4, 1, 1);
+                add(versiering, 0, 5, 1, 1);
+                add(eindTotaal, 0,6,1,1);
+
             }
         });
     }
@@ -199,4 +228,9 @@ public class KassaTab extends GridPane implements Observer {
     public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         artikelController.voorraadOmlaag(artNr);
     }
+
+
+
+
+
 }

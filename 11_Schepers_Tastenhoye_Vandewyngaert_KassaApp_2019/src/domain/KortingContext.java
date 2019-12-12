@@ -11,18 +11,18 @@ public class KortingContext {
 
     }
 
-    public void setTaalInterface(KortingStrategy kortingStrategy){
+    public void setKortingInterface(KortingStrategy kortingStrategy){
         this.kortingStrategy = kortingStrategy;
     }
 
-    public int getAanspreking(){
+    public int getKorting(){
         return kortingStrategy.getKorting();
     }
 
     public List<String> getKortingLijst(){
         List <String> kortinglijst = new ArrayList<String>();
-        for (KortingEnum taal:KortingEnum.values()){
-            kortinglijst.add(taal.toString());
+        for (KortingEnum korting:KortingEnum.values()){
+            kortinglijst.add(korting.toString());
         }
         return kortinglijst;
     }

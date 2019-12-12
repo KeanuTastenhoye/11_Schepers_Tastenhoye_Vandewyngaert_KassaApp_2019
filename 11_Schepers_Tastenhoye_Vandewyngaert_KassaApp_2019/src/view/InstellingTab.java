@@ -1,6 +1,7 @@
 package view;
 
 import database.Methode;
+import domain.KortingEnum;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -118,6 +119,73 @@ public class InstellingTab extends GridPane {
                 }
 
                 schrijver.write(keuze);
+            }
+        });
+
+        groepBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+            KortingEnum korting = null;
+
+            if(groepkorting.isSelected()){
+                korting = KortingEnum.GROEP;
+                String groep = null;
+
+                if(gr1.isSelected()){
+                    groep = "gr1";
+                }else if(gr2.isSelected()){
+                    groep = "gr2";
+                }else throw new IllegalArgumentException("Gelieve een goep te kiezen aub");
+
+            if(groepTXT != null &&! groepTXT.getText().trim().isEmpty()){
+                System.out.println("Er is " + groepTXT.getText() +  "% groepskorting op " + groep);
+                }else throw new IllegalArgumentException("gelieve aan te duien hoeveel koritng er moet zijn ");
+
+            }else throw new IllegalArgumentException("Je hebt heelemaal geen groepskorting aangeduid");
+
+            }
+        });
+
+        drempelBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                KortingEnum korting = null;
+
+                if(drempelkorting.isSelected()){
+                    korting = KortingEnum.DREMPEL;
+
+
+                    String getal = null;
+                    if(dr1.isSelected()){
+                        getal = "50";
+                    }else if(dr2.isSelected()){
+                        getal = "100";
+                    }else throw new IllegalArgumentException("je moet een getal aanduiden");
+
+
+                    if(drempelTXT != null &&! drempelTXT.getText().trim().isEmpty()){
+                        System.out.println("Vanaf " + getal + " is er " + drempelTXT.getText() + "% korting");
+                    }else throw new IllegalArgumentException("gelieve aan te duien hoeveel koritng er moet zijn ");
+
+                }else throw new IllegalArgumentException("Je hebt heelemaal geen drempelkorting aangeduid");
+            }
+        });
+
+        duursteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                KortingEnum korting = null;
+
+                if(duurstekorting.isSelected()){
+                    korting = KortingEnum.DUURSTE;
+
+
+                    if(duursteTXT != null &&! duursteTXT.getText().trim().isEmpty()){
+                        System.out.println(duursteTXT.getText() + "% korting op de duurste art");
+                    }else throw new IllegalArgumentException("gelieve aan te duien hoeveel koritng er moet zijn ");
+
+                }else throw new IllegalArgumentException("Je hebt heelemaal geen duurstekorting aangeduid");
+
             }
         });
     }

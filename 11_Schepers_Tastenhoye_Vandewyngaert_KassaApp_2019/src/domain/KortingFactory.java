@@ -3,7 +3,7 @@ package domain;
 public class KortingFactory {
 
 
-    public static KortingStrategy createTaal(String soortKorting){
+    public static KortingStrategy createKorting(String soortKorting){
         KortingEnum korting = KortingEnum.valueOf(soortKorting);
         String klasseNaam = korting.getKlasseNaam();
         KortingStrategy kortingStrategy = null;
