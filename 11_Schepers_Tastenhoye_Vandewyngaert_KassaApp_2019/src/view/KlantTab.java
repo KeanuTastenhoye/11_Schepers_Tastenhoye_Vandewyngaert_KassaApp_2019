@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -11,6 +12,8 @@ import domain.Artikel;
 
 import model.observer.Observer;
 
+import java.util.ArrayList;
+
 public class KlantTab extends GridPane implements Observer {
     private TableView table;
 
@@ -21,22 +24,22 @@ public class KlantTab extends GridPane implements Observer {
 
         Label totaalLabel = new Label("Totaal: ");
 
-        TableColumn Nr = new TableColumn<>("Nr");
-        TableColumn Naam = new TableColumn<>("Naam");
-        TableColumn Groep = new TableColumn<>("Groep");
-        TableColumn Prijs = new TableColumn<>("Prijs");
-        TableColumn Voorraad = new TableColumn<>("Voorraad");
+        TableColumn artikelNr = new TableColumn<>("Nr");
+        TableColumn artikelNaam = new TableColumn<>("Naam");
+        TableColumn artikelGroep = new TableColumn<>("Groep");
+        TableColumn artikelPrijs = new TableColumn<>("Prijs");
+        TableColumn artikelVoorraad = new TableColumn<>("Voorraad");
 
-        Nr.setCellValueFactory(new PropertyValueFactory("Nr"));
-        Naam.setCellValueFactory(new PropertyValueFactory("Naam"));
-        Groep.setCellValueFactory(new PropertyValueFactory("Groep"));
-        Prijs.setCellValueFactory(new PropertyValueFactory("Prijs"));
-        Voorraad.setCellValueFactory(new PropertyValueFactory("Voorraad"));
+        artikelNr.setCellValueFactory(new PropertyValueFactory("artikelNr"));
+        artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
+        artikelGroep.setCellValueFactory(new PropertyValueFactory("artikelGroep"));
+        artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
+        artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
 
         table = new TableView<String>();
         table.setPrefWidth(REMAINING);
-        table.getColumns().addAll(Nr, Naam, Groep, Prijs, Voorraad);
-        table.getSortOrder().add(Naam);
+        table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
+        table.getSortOrder().add(artikelNaam);
 
         HBox hbox = new HBox(totaalLabel);
 
@@ -46,8 +49,9 @@ public class KlantTab extends GridPane implements Observer {
 
     @Override
     public void update(ObservableList<Artikel> klantlist) {
-        System.out.println("Klant tab klantlist " + klantlist);
-        table.refresh();
+        System.out.println("Klanten list: " + klantlist);
+
         table.setItems(klantlist);
+        table.refresh();
     }
 }

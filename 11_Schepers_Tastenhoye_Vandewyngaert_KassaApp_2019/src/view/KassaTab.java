@@ -40,20 +40,38 @@ public class KassaTab extends GridPane implements Observer {
         Button continu = new Button("Continue");
         Button afsluiten = new Button("Afsluiten");
 
-
         HBox knopjes = new HBox(artikelCodeLabel, artikelCodeText, save, delete, onHold, continu, afsluiten);
 
         this.add(knopjes, 0, 2, 1, 1);
 
         Label totaalLabel = new Label("Totaal: ");
-
         Label bedragLabel = new Label("");
         Label koritngTxt = new Label("Korting: ");
         Label kortingLabel = new Label("");
         Label versieringLabel = new Label("--------------------------------------");
         Label eindTotaal = new Label("Te betalen: ");
 
+        TableColumn artikelNr = new TableColumn<>("Nr");
+        TableColumn artikelNaam = new TableColumn<>("Naam");
+        TableColumn artikelGroep = new TableColumn<>("Groep");
+        TableColumn artikelPrijs = new TableColumn<>("Prijs");
+        TableColumn artikelVoorraad = new TableColumn<>("Voorraad");
 
+        artikelNr.setCellValueFactory(new PropertyValueFactory("artikelNr"));
+        artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
+        artikelGroep.setCellValueFactory(new PropertyValueFactory("artikelGroep"));
+        artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
+        artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
+
+        table = new TableView<String>();
+        table.setPrefWidth(REMAINING);
+        table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
+        table.getSortOrder().add(artikelNaam);
+
+        HBox totaal = new HBox(totaalLabel, bedragLabel);
+
+        add(totaal, 0, 3, 1, 1);
+        add(table, 0, 7, 2, 2);
 
         save.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -68,35 +86,9 @@ public class KassaTab extends GridPane implements Observer {
                         alert.setContentText("Het artikel nummer dat U invoerde bestaat niet.");
                         alert.showAndWait();
                     } else {
-                        TableColumn artikelNr = new TableColumn<>("Nr");
-                        TableColumn artikelNaam = new TableColumn<>("Naam");
-                        TableColumn artikelGroep = new TableColumn<>("Groep");
-                        TableColumn artikelPrijs = new TableColumn<>("Prijs");
-                        TableColumn artikelVoorraad = new TableColumn<>("Voorraad");
-
-                        artikelNr.setCellValueFactory(new PropertyValueFactory("artikelNr"));
-                        artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
-                        artikelGroep.setCellValueFactory(new PropertyValueFactory("artikelGroep"));
-                        artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
-                        artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
-
-                        table = new TableView<String>();
-                        table.setPrefWidth(REMAINING);
-
-                        //update();
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
-
-                        table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
-                        table.getSortOrder().add(artikelNaam);
-
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
-
-                        HBox totaal = new HBox(totaalLabel, bedragLabel);
-
                         artikelController.doObserver();
-
-                        add(totaal, 0, 3, 1, 1);
-                        add(table, 0, 7, 2, 2);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -121,30 +113,8 @@ public class KassaTab extends GridPane implements Observer {
                         alert.setContentText("Het artikel nummer dat U invoerde staat niet in de lijst.");
                         alert.showAndWait();
                     } else {
-                        TableColumn artikelNr = new TableColumn<>("Nr");
-                        TableColumn artikelNaam = new TableColumn<>("Naam");
-                        TableColumn artikelGroep = new TableColumn<>("Groep");
-                        TableColumn artikelPrijs = new TableColumn<>("Prijs");
-                        TableColumn artikelVoorraad = new TableColumn<>("Voorraad");
-
-                        artikelNr.setCellValueFactory(new PropertyValueFactory("artikelNr"));
-                        artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
-                        artikelGroep.setCellValueFactory(new PropertyValueFactory("artikelGroep"));
-                        artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
-                        artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
-
-                        table = new TableView<String>();
-                        table.setPrefWidth(REMAINING);
                         table.setItems(artikelController.getDeleteVerkoopObservable(artikelNrke));
-                        table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
-                        table.getSortOrder().add(artikelNaam);
-
                         bedragLabel.setText(Double.toString(artikelController.getDeleteVerkoopPrijs(artikelNrke)));
-
-                        HBox totaal = new HBox(totaalLabel, bedragLabel);
-
-                        add(totaal, 0, 3, 1, 1);
-                        add(table, 0, 6, 2, 2);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -155,15 +125,13 @@ public class KassaTab extends GridPane implements Observer {
         onHold.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(klantNaOnHoldCounter<3)
-                {
+                if (klantNaOnHoldCounter<3) {
                     klantNaOnHoldCounter++;
                     artikelController.setOnHold();
                     artikelController.setOnHoldPrijs();
                     table.getItems().clear();
                     bedragLabel.setText("");
                 }
-
             }
         });
 
@@ -171,34 +139,12 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    klantNaOnHoldCounter=0;
+                    klantNaOnHoldCounter = 0;
                     table.getItems().clear();
                     bedragLabel.setText("");
-                    TableColumn artikelNr = new TableColumn<>("Nr");
-                    TableColumn artikelNaam = new TableColumn<>("Naam");
-                    TableColumn artikelGroep = new TableColumn<>("Groep");
-                    TableColumn artikelPrijs = new TableColumn<>("Prijs");
-                    TableColumn artikelVoorraad = new TableColumn<>("Voorraad");
-
-                    artikelNr.setCellValueFactory(new PropertyValueFactory("artikelNr"));
-                    artikelNaam.setCellValueFactory(new PropertyValueFactory("artikelNaam"));
-                    artikelGroep.setCellValueFactory(new PropertyValueFactory("artikelGroep"));
-                    artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
-                    artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
-
-                    table = new TableView<String>();
-                    table.setPrefWidth(REMAINING);
                     table.setItems(artikelController.getOnHoldObservable());
                     artikelController.clearOnHold();
-                    table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
-                    table.getSortOrder().add(artikelNaam);
-
                     bedragLabel.setText(Double.toString(artikelController.getOnHoldPrijs()));
-
-                    HBox totaal = new HBox(totaalLabel, bedragLabel);
-
-                    add(totaal, 0, 3, 1, 1);
-                    add(table, 0, 7, 2, 2);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -208,18 +154,13 @@ public class KassaTab extends GridPane implements Observer {
         afsluiten.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 kortingLabel.setText("JA WADDE JE HEBT KORTING");
-
-
-
                 HBox korting = new HBox(koritngTxt, kortingLabel);
                 HBox versiering = new HBox(versieringLabel);
                 HBox eindtotaal = new HBox(eindTotaal);
                 add(korting, 0, 4, 1, 1);
                 add(versiering, 0, 5, 1, 1);
                 add(eindTotaal, 0,6,1,1);
-
             }
         });
     }
@@ -228,9 +169,4 @@ public class KassaTab extends GridPane implements Observer {
     public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         artikelController.voorraadOmlaag(artNr);
     }
-
-
-
-
-
 }
