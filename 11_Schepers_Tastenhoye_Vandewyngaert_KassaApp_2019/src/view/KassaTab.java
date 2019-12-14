@@ -14,9 +14,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import jxl.read.biff.BiffException;
+import model.decorator.HeaderMetAlgInfo;
+import model.decorator.Kassabon;
+import model.decorator.KassabonAbstract;
 import model.observer.Observer;
 
 import java.io.IOException;
+import java.util.List;
 
 public class KassaTab extends GridPane implements Observer {
     private ArtikelController artikelController;
@@ -39,8 +43,10 @@ public class KassaTab extends GridPane implements Observer {
         Button onHold = new Button("OnHold");
         Button continu = new Button("Continue");
         Button afsluiten = new Button("Afsluiten");
+        Button betalen = new Button("Betalen");
+        Button annuleren = new Button("Annuleren");
 
-        HBox knopjes = new HBox(artikelCodeLabel, artikelCodeText, save, delete, onHold, continu, afsluiten);
+        HBox knopjes = new HBox(artikelCodeLabel, artikelCodeText, save, delete, onHold, continu, afsluiten, betalen,annuleren);
 
         this.add(knopjes, 0, 2, 1, 1);
 
@@ -163,10 +169,42 @@ public class KassaTab extends GridPane implements Observer {
                 add(eindTotaal, 0,6,1,1);
             }
         });
+
+        betalen.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                /*
+                try {
+                    List<Artikel> artiekels = artikelController.getArtikels();
+                    KassabonAbstract kassabon = new Kassabon(artiekels) {
+
+                    };
+
+                    kassabon = new HeaderMetAlgInfo(kassabon);
+                    System.out.println(kassabon.print(artiekels));
+
+                } catch (BiffException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+*/
+            }
+        });
+
+        annuleren.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+           //code voor annuleren
+            }
+        });
     }
 
     @Override
     public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         artikelController.voorraadOmlaag(artNr);
     }
+
+
+
 }

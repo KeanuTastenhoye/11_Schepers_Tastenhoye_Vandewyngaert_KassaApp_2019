@@ -15,6 +15,7 @@ public class GroepsKorting implements KortingStrategy {
 
     @Override
     public int getKorting() {
+
         return korting;
     }
 }

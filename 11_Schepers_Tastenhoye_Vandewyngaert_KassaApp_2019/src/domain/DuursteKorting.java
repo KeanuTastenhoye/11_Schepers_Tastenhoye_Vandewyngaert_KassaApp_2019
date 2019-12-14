@@ -15,6 +15,7 @@ public class DuursteKorting implements KortingStrategy {
 
     @Override
     public int getKorting() {
+
         return korting;
     }
 }
