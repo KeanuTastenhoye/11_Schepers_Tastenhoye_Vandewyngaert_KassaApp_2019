@@ -1,5 +1,6 @@
 package view;
 
+import database.KortingSchrijver;
 import database.Methode;
 import domain.KortingEnum;
 import javafx.event.ActionEvent;
@@ -17,9 +18,11 @@ import java.lang.reflect.Method;
 
 public class InstellingTab extends GridPane {
     private PropertySchrijver schrijver;
+    private KortingSchrijver kortingSchrijver;
 
     public InstellingTab() {
         this.schrijver = new PropertySchrijver();
+        this.kortingSchrijver = new KortingSchrijver();
         this.setPadding(new Insets(5,5,5,5));
         this.setVgap(5);
         this.setHgap(5);
@@ -133,7 +136,9 @@ public class InstellingTab extends GridPane {
 
                 if(gr1.isSelected()){
                     groep = "gr1";
+                    kortingSchrijver.write(KortingEnum.GROEP, "gr1", groepTXT.getText());
                 }else if(gr2.isSelected()){
+                    kortingSchrijver.write(KortingEnum.GROEP, "gr2", groepTXT.getText());
                     groep = "gr2";
                 }else throw new IllegalArgumentException("Gelieve een goep te kiezen aub");
 
@@ -141,7 +146,7 @@ public class InstellingTab extends GridPane {
                 System.out.println("Er is " + groepTXT.getText() +  "% groepskorting op " + groep);
                 }else throw new IllegalArgumentException("gelieve aan te duien hoeveel koritng er moet zijn ");
 
-            }else throw new IllegalArgumentException("Je hebt heelemaal geen groepskorting aangeduid");
+            }else throw new IllegalArgumentException("Je hebt helemaal geen groepskorting aangeduid");
 
             }
         });
@@ -153,15 +158,15 @@ public class InstellingTab extends GridPane {
 
                 if(drempelkorting.isSelected()){
                     korting = KortingEnum.DREMPEL;
-
-
                     String getal = null;
+
                     if(dr1.isSelected()){
                         getal = "50";
+                        kortingSchrijver.write(KortingEnum.DREMPEL, "50", drempelTXT.getText());
                     }else if(dr2.isSelected()){
                         getal = "100";
+                        kortingSchrijver.write(KortingEnum.DREMPEL, "100", drempelTXT.getText());
                     }else throw new IllegalArgumentException("je moet een getal aanduiden");
-
 
                     if(drempelTXT != null &&! drempelTXT.getText().trim().isEmpty()){
                         System.out.println("Vanaf " + getal + " is er " + drempelTXT.getText() + "% korting");
@@ -178,7 +183,7 @@ public class InstellingTab extends GridPane {
 
                 if(duurstekorting.isSelected()){
                     korting = KortingEnum.DUURSTE;
-
+                    kortingSchrijver.write(KortingEnum.DUURSTE, duursteTXT.getText());
 
                     if(duursteTXT != null &&! duursteTXT.getText().trim().isEmpty()){
                         System.out.println(duursteTXT.getText() + "% korting op de duurste art");
