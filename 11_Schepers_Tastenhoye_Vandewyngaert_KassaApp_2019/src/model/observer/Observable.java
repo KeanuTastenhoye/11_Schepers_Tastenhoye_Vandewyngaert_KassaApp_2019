@@ -10,5 +10,5 @@ import java.util.List;
 public interface Observable {
     void addObserver(Observer o);
     void removeObserver(Observer o);
-    void notifyObservers(ObservableList<Artikel> klantlist) throws IOException, BiffException;
+    void notifyObservers(ObservableList<String> klantlist) throws IOException, BiffException;
 }

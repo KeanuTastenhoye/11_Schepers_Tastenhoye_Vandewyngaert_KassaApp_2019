@@ -48,7 +48,7 @@ public class KlantTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(ObservableList<Artikel> klantlist) {
+    public void update(ObservableList<String> klantlist) {
         System.out.println("Klanten list: " + klantlist);
 
         table.setItems(klantlist);

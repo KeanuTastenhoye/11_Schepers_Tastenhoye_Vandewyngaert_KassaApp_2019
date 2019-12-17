@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jxl.read.biff.BiffException;
 import view.KassaTab;
@@ -64,21 +66,81 @@ public class ArtikelController {
         for (Artikel a: getService().getArtikels()) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
-                verkoopArtikels = artikels;
+                verkoopArtikels.add(a);
+                System.out.println("Verk Artikels: " + verkoopArtikels);
                 return artikels;
             }
         }
         throw new IllegalArgumentException("Het artikel nummer bestaat niet");
     }
 
+    public boolean contains(List<Artikel> artikels, Artikel art){
+        for (Artikel a:artikels) {
+            if(a.getArtikelNaam().equals(art.getArtikelNaam())) return false;
+            else if(a.getArtikelGroep().equals(art.getArtikelGroep())) return false;
+        }
+        return true;
+    }
+
+    /*
     public List<Artikel> getVerkoopArtikelsNietDubbel() throws BiffException, IOException {
         for (Artikel a: verkoopArtikels) {
-            if (!klantArtikels.contains(a)) {
+            if (!contains(klantArtikels, a)) {
                 klantArtikels.add(a);
             }
         }
         return klantArtikels;
     }
+    */
+
+    public Map<String, List<String>> getVerkoopArtikelsNietDubbel(List<Artikel> kutlijst) throws BiffException, IOException {
+        Map<String, List<String>> artikelMap = new HashMap<>();
+        int aantal = 1;
+
+        for (Artikel a: kutlijst) {
+            //bestaand artikel aantal ++
+            if (artikelMap.containsKey(a.getArtikelNr())) {
+                int aantalInLijst = Integer.parseInt(artikelMap.get(a.getArtikelNr()).get(1)) + 1;
+
+                List<String> artikelLijst = new ArrayList<>();
+
+                artikelLijst.add(a.getArtikelNaam());
+                artikelLijst.add(String.valueOf(aantalInLijst));
+                artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.replace(a.getArtikelNr(), artikelLijst);
+
+            } else {//anders  gwn toevoegen aan de lijst
+                List<String> artikelLijst = new ArrayList<>();
+
+                artikelLijst.add(a.getArtikelNaam());
+                artikelLijst.add(String.valueOf(aantal));
+                artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.put(a.getArtikelNr(), artikelLijst);
+            }
+        }
+        return artikelMap;
+    }
+
+    public List<String> mapToListString(Map<String, List<String>> artikels) {
+        List<String> arts = new ArrayList<>();
+
+
+        for (String key:artikels.keySet()) {
+            arts.addAll(artikels.get(key));
+        }
+        return arts;
+    }
+
+    public List<Artikel> getAllScannedArtikels() {
+        return klantArtikels;
+    }
+
+    public List<Artikel> getAllScannedArtikelsv2() {
+        return verkoopArtikels;
+    }
+
 
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
         oudeArtikels.clear();
@@ -177,9 +239,12 @@ public class ArtikelController {
         }
     }
 
+    /*
     public void doObserver() throws IOException, BiffException {
         ArtikelDbInMemory.getInstance().notifyObservers(getKlantObservable());
     }
+
+    */
 
     //Observables
     public ObservableList<Artikel> getArtikelObservable() throws BiffException, IOException {
@@ -202,8 +267,11 @@ public class ArtikelController {
         return artikels;
     }
 
-    public ObservableList<Artikel> getKlantObservable() throws BiffException, IOException {
-        ObservableList<Artikel> artikels = FXCollections.observableArrayList(getVerkoopArtikelsNietDubbel());
+    /*
+    public ObservableList<String> getKlantObservable() throws BiffException, IOException {
+        ObservableList<String> artikels = FXCollections.observableArrayList(mapToListString(getVerkoopArtikelsNietDubbel()));
         return artikels;
     }
+    */
+
 }

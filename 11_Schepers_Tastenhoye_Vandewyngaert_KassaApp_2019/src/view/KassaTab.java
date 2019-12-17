@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import jxl.read.biff.BiffException;
+import model.decorator.FooterMetBericht;
 import model.decorator.HeaderMetAlgInfo;
 import model.decorator.Kassabon;
 import model.decorator.KassabonAbstract;
@@ -94,7 +95,7 @@ public class KassaTab extends GridPane implements Observer {
                     } else {
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
-                        artikelController.doObserver();
+                        //artikelController.doObserver();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -173,22 +174,17 @@ public class KassaTab extends GridPane implements Observer {
         betalen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /*
                 try {
-                    List<Artikel> artiekels = artikelController.getArtikels();
-                    KassabonAbstract kassabon = new Kassabon(artiekels) {
-
-                    };
+                    KassabonAbstract kassabon = new Kassabon() {};
 
                     kassabon = new HeaderMetAlgInfo(kassabon);
-                    System.out.println(kassabon.print(artiekels));
+                    System.out.println(kassabon.print(artikelController.getAllScannedArtikelsv2()));
 
                 } catch (BiffException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-*/
             }
         });
 
@@ -201,10 +197,7 @@ public class KassaTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
+    public void update(ObservableList<String> klantlist) throws IOException, BiffException {
         artikelController.voorraadOmlaag(artNr);
     }
-
-
-
 }
