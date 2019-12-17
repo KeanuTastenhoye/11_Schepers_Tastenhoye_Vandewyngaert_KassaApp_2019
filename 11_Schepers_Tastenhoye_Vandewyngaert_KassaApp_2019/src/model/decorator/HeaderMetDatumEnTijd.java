@@ -1,7 +1,9 @@
 package model.decorator;
 
 import domain.Artikel;
+import jxl.read.biff.BiffException;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class HeaderMetDatumEnTijd extends KassabonDecorator{
     }
 
     @Override
-    public String print(List<Artikel> artikels) {
-        return getText() + kassabon.print(artikels);
+    public String print(List<Artikel> artList)throws BiffException, IOException {
+        return getText() + kassabon.print(artList);
     }
 
 }

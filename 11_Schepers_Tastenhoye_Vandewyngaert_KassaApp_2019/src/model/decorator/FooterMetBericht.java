@@ -1,10 +1,12 @@
 package model.decorator;
 
 import domain.Artikel;
+import jxl.read.biff.BiffException;
 
+import java.io.IOException;
 import java.util.List;
 
-public class FooterMetBericht   extends KassabonDecorator{
+public class FooterMetBericht extends KassabonDecorator {
     private  KassabonAbstract kassabon;
     private  String text;
 
@@ -17,7 +19,7 @@ public class FooterMetBericht   extends KassabonDecorator{
     }
 
     @Override
-    public String print(List<Artikel> artikels) {
-        return kassabon.print(artikels) + getText();
+    public String print(List<Artikel> artList) throws BiffException, IOException {
+        return kassabon.print(artList) + getText();
     }
 }

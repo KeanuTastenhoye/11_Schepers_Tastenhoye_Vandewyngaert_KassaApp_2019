@@ -19,7 +19,6 @@ import java.io.IOException;
 public class ArtikelTab extends GridPane implements Observer {
     private TableView table;
     private ArtikelController artikelController;
-    private String artikelNr, artikelNaam, artikelPrijs, artikelGroep, artikelVoorraad;
 
     public ArtikelTab() throws BiffException, IOException {
         this.artikelController = new ArtikelController();
@@ -51,7 +50,7 @@ public class ArtikelTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
+    public void update(ObservableList<String> klantlist) throws IOException, BiffException {
         //Vul de table opnieuw na voorraad aanpassing van kassaTab
         table.refresh();
     }
