@@ -19,15 +19,13 @@ public abstract class Kassabon extends KassabonAbstract {
 
 
     // Get aantal per gescand product
-    public int getAantal(List<Artikel> artikels, String naam){
-        int aantal = 0;
+    public double getTotaalPrijs(List<Artikel> artikels){
+        double totaal = 0;
 
         for (Artikel a: artikels) {
-            if(a.getArtikelNaam().equals(naam)){
-                aantal++;
-            }
+            totaal += Double.parseDouble(a.getArtikelPrijs());
         }
-        return aantal;
+        return totaal;
     }
 
 
@@ -45,16 +43,19 @@ public abstract class Kassabon extends KassabonAbstract {
 
     public String print(List<Artikel> artList) throws BiffException, IOException {
         Map<String, List<String>> artMap = controller.getVerkoopArtikelsNietDubbel(artList);
+        double totaal = 0;
 
         String decorator = "Omschrijving                 |Aantal       |Prijs  \n";
         decorator += "---------------------------------------------------\n";
 
         for (String key:artMap.keySet()) {
             decorator += (artMap.get(key).get(0) + "                          |" + artMap.get(key).get(1) + "       |" + artMap.get(key).get(2) + "\n");
+        totaal += Double.parseDouble(artMap.get(key).get(2));
         }
 
         decorator += "---------------------------------------------------\n";
-        //  decorator += "Betaald (incl korting                              \n";
+        //KORTING MOET ER NOG AF GETROKKEN WORDEN
+        decorator += "Betaald (incl korting)                        " + getTotaalPrijs(artList) + " EUR\n";
         return decorator;
     }
 
