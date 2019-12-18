@@ -20,7 +20,10 @@ import model.decorator.Kassabon;
 import model.decorator.KassabonAbstract;
 import model.observer.Observer;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class KassaTab extends GridPane implements Observer {
@@ -161,11 +164,27 @@ public class KassaTab extends GridPane implements Observer {
         afsluiten.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                kortingLabel.setText("JA WADDE JE HEBT KORTING");
-                HBox korting = new HBox(koritngTxt, kortingLabel);
+                File file = new File("D:\\UCLL\\FASE_2\\OO Ontwerpen\\untitled\\src\\bestanden\\kortingStrategieProperties");
+
+                try {
+                    HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
+                    if(!koritngTxt.equals("") || kortingen.containsKey(KortingEnum.DREMPEL) && artikelController.getAllScannedArtikelsv2().size()<Integer.parseInt(kortingen.get(KortingEnum.DREMPEL).get(1))
+                            ||kortingen.containsKey(KortingEnum.GROEP)&& artikelController.hasGroup(kortingen.get(KortingEnum.GROEP).get(1)))  {
+                        kortingLabel.setText("JA WADDE JE HEBT KORTING");
+                        TextField korting = new TextField("prijs zonder korting: "+Double.toString(artikelController.getTotalPriceScannedItems())
+                                +" aantal korting: "+Double.toString(artikelController.getAmountOfKorting())
+                                +" totale prijs met korting: "+Double.toString(artikelController.getTotalPriceScannedItems()-artikelController.getAmountOfKorting()));
+                        add(korting, 0, 4, 1, 1);
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (BiffException e) {
+                    e.printStackTrace();
+                }
+
                 HBox versiering = new HBox(versieringLabel);
                 HBox eindtotaal = new HBox(eindTotaal);
-                add(korting, 0, 4, 1, 1);
                 add(versiering, 0, 5, 1, 1);
                 add(eindTotaal, 0,6,1,1);
             }

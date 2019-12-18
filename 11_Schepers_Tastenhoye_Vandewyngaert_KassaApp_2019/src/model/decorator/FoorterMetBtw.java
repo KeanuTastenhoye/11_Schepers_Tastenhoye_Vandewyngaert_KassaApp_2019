@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FoorterMetBtw   extends KassabonDecorator{
-    private  KassabonAbstract kassabon;
+    private KassabonAbstract kassabon;
     private  String text;
 
 

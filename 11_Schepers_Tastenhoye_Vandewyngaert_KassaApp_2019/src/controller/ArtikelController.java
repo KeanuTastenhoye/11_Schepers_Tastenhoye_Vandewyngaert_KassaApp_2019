@@ -1,9 +1,11 @@
 package controller;
 
 import database.ArtikelDbInMemory;
+import database.KortingLezer;
 import domain.Artikel;
 import database.Service;
 
+import domain.KortingEnum;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -29,7 +31,7 @@ public class ArtikelController {
     private List<Artikel> onHold;
     private List<Artikel> verkoopArtikels;
     private List<Artikel> klantArtikels;
-
+    private KortingLezer lezer;
     private double prijs;
     private double onHoldPrijs;
 
@@ -44,6 +46,7 @@ public class ArtikelController {
         onHold = new ArrayList<>();
         verkoopArtikels = new ArrayList<>();
         klantArtikels = new ArrayList<>();
+        lezer=new KortingLezer();
 
         this.stage = new Stage();
     }
@@ -73,6 +76,18 @@ public class ArtikelController {
         }
         throw new IllegalArgumentException("Het artikel nummer bestaat niet");
     }
+    public boolean hasGroup(String groep)
+    {
+        for(Artikel a : artikels)
+        {
+            if(a.getArtikelGroep().equals(groep))
+            {
+                return true;
+            }
+        }
+        return  false;
+    }
+
 
     public boolean contains(List<Artikel> artikels, Artikel art){
         for (Artikel a:artikels) {
@@ -123,6 +138,7 @@ public class ArtikelController {
         return artikelMap;
     }
 
+
     public List<String> mapToListString(Map<String, List<String>> artikels) {
         List<String> arts = new ArrayList<>();
 
@@ -141,6 +157,62 @@ public class ArtikelController {
         return verkoopArtikels;
     }
 
+    public double getAmountOfKorting() throws IOException, BiffException {
+        double res=0;
+        if(getKortingen().containsKey(KortingEnum.GROEP))
+        {
+            double groepskorting=0;
+            for(Artikel a: getAllScannedArtikels())
+            {
+                //System.out.println("KIJK HIERRRRRRRRRRRR"+getKortingen().get(KortingEnum.GROEP).get(0)+""+a.getArtikelGroep()+"h");
+                if(a.getArtikelGroep().equals(getKortingen().get(KortingEnum.GROEP).get(0)))
+                {
+                    groepskorting+=(Double.parseDouble(a.getArtikelPrijs()))*Integer.parseInt(getKortingen().get(KortingEnum.GROEP).get(1))/100;
+                }
+            }
+            res+=groepskorting;
+        }
+        if(getKortingen().containsKey(KortingEnum.DREMPEL)) {
+            double drempelkorting = 0;
+            if (getAllScannedArtikels().size() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(0))) {
+                for (Artikel a : getAllScannedArtikels()) {
+                    if (a.getArtikelGroep() == getKortingen().get(KortingEnum.GROEP).get(1)) {
+                        drempelkorting += (Double.parseDouble(a.getArtikelPrijs()))/100*20;
+                    }
+                }
+                res += drempelkorting * Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(1))/100;
+            }
+        }
+
+        if(getKortingen().containsKey(KortingEnum.DUURSTE)) {
+            double duursteKorting = 0;
+
+            for (Artikel a : getAllScannedArtikels()) {
+                if (Double.parseDouble(a.getArtikelPrijs())>duursteKorting) {
+                    duursteKorting= (Double.parseDouble(a.getArtikelPrijs()));
+                }
+            }
+            res += (duursteKorting*Integer.parseInt(getKortingen().get(KortingEnum.DUURSTE).get(1)))/100;
+
+
+        }
+        return res;
+
+
+    }
+
+    public double getTotalPriceScannedItems()
+    {
+        double res=0;
+        for(Artikel a:getAllScannedArtikels())
+        {
+            res+=Double.parseDouble(a.getArtikelPrijs());
+        }
+        return res;
+    }
+    public HashMap<KortingEnum,ArrayList<String>> getKortingen() throws IOException, BiffException {
+        return lezer.load();
+    }
 
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
         oudeArtikels.clear();

@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class HeaderMetDatumEnTijd extends KassabonDecorator{
+public class HeaderMetDatumEnTijd extends KassabonDecorator {
 
-    private  KassabonAbstract kassabon;
+    private KassabonAbstract kassabon;
     private  String text;
 
 
