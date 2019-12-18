@@ -2,8 +2,6 @@ package view;
 
 import controller.ArtikelController;
 
-import database.Methode;
-import domain.Artikel;
 import domain.KortingEnum;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,16 +12,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import jxl.read.biff.BiffException;
-import model.decorator.FooterMetBericht;
-import model.decorator.HeaderMetAlgInfo;
-import model.decorator.Kassabon;
-import model.decorator.KassabonAbstract;
+import model.decorator.*;
 import model.observer.Observer;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.Arrays;
+
 import java.util.List;
 
 public class KassaTab extends GridPane implements Observer {
@@ -195,8 +194,60 @@ public class KassaTab extends GridPane implements Observer {
             public void handle(ActionEvent event) {
                 try {
                     KassabonAbstract kassabon = new Kassabon() {};
+                    String lijn;
+                    String inputVeld = null;
+                    int haakjePlaats = 0;
+                    String decKeuzes[];
+                    List<String> decShit;
 
-                    kassabon = new HeaderMetAlgInfo(kassabon);
+                    try {
+                        BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+                        //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+
+                        while ((lijn = reader.readLine()) != null) {
+                            if (lijn.charAt(0) != '#') {
+                                for (int i = 0; i < lijn.length(); i++) {
+                                    if (lijn.charAt(i) == ']') {
+                                        haakjePlaats = i;
+                                    }
+                                }
+                                if (lijn.substring(0,6).equals("Input=")) {
+                                    inputVeld = lijn.substring(7);
+                                }
+                                if (lijn.substring(0, 6).equals("Keuze=")) {
+                                   List<String> lijst = new ArrayList<>();
+                                   lijst.add(lijn.substring(7, haakjePlaats));
+
+                                   for (String s: lijst) {
+                                       decKeuzes = s.split(" , ");
+                                       decShit = new ArrayList<>(Arrays.asList(decKeuzes));
+
+                                       for (String str: decShit) {
+                                            if (str.equals("alg")) {
+                                                kassabon = new HeaderMetAlgInfo(kassabon, inputVeld);
+                                            }
+                                            if (str.equals("date")) {
+                                                kassabon = new HeaderMetDatumEnTijd(kassabon);
+                                            }
+                                            if (str.equals("kort")) {
+                                                kassabon = new FooterKorting(kassabon);
+                                            }
+                                            if (str.equals("btw")) {
+                                                kassabon = new FooterMetBtw(kassabon);
+                                            }
+                                            if (str.equals("danku")) {
+                                                kassabon = new FooterMetBericht(kassabon);
+                                            }
+                                       }
+                                   }
+                                }
+                            } else {
+                            }
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     System.out.println(kassabon.print(artikelController.getAllScannedArtikelsv2()));
 
                 } catch (BiffException e) {

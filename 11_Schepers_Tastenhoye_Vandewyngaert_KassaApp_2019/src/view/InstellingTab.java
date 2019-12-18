@@ -1,5 +1,6 @@
 package view;
 
+import database.DecoratorWriter;
 import database.KortingSchrijver;
 import database.Methode;
 import domain.KortingEnum;
@@ -15,16 +16,21 @@ import javafx.scene.layout.VBox;
 import database.PropertySchrijver;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InstellingTab extends GridPane {
     private PropertySchrijver schrijver;
     private KortingSchrijver kortingSchrijver;
+    private DecoratorWriter decoratorSchrijver;
 
     public InstellingTab() {
         this.schrijver = new PropertySchrijver();
         this.kortingSchrijver = new KortingSchrijver();
+        this.decoratorSchrijver = new DecoratorWriter();
+
         this.setPadding(new Insets(5,5,5,5));
-        this.setVgap(5);
+        this.setVgap(2);
         this.setHgap(5);
 
         //Opslag strategie
@@ -38,11 +44,11 @@ public class InstellingTab extends GridPane {
         tekstButton.setToggleGroup(groep);
         excelButton.setToggleGroup(groep);
 
-        Button knop = new Button("Save");
+        Button opslag = new Button("Save");
 
         this.add(tekstButton, 0, 2, 1, 1);
         this.add(excelButton, 0, 3, 1, 1);
-        this.add(knop, 0, 5, 1, 1);
+        this.add(opslag, 0, 5, 1, 1);
 
         //Korting
         this.add(new Label("Kies de korting: "), 0,7,2,1);
@@ -110,7 +116,31 @@ public class InstellingTab extends GridPane {
         this.add(lblDuurste, 3, 19, 1, 1);
         this.add(duursteBtn, 4, 19, 1, 1);
 
-        knop.setOnAction(new EventHandler<ActionEvent>() {
+        //Kassabon
+        RadioButton headerAlgBoodschap = new RadioButton("Header met algemene info");
+        TextField algemeneInfo = new TextField();
+        RadioButton HeaderdateTime = new RadioButton("Header met huidige datum en tijd");
+
+        this.add(new Label("Header: "), 0,20,2,1);
+        this.add(headerAlgBoodschap, 0, 21, 1, 1);
+        this.add(algemeneInfo, 2, 21, 1, 1);
+        this.add(HeaderdateTime, 0, 22, 1, 1);
+
+        RadioButton FooterKorting = new RadioButton("Footer prijs zonder korting + korting bedrag");
+        RadioButton FooterBtw = new RadioButton("Footer prijs zonder btw + btw bedrag");
+        RadioButton FooterDanku = new RadioButton("Footer met 'Thank you come again!'" );
+
+        this.add(new Label("Footer: "), 0,23,2,1);
+        this.add(FooterKorting, 0, 24, 1, 1);
+        this.add(FooterBtw, 0, 25, 1, 1);
+        this.add(FooterDanku, 0, 26, 1, 1);
+
+        Button kassabon = new Button("Save");
+
+        this.add(kassabon, 0, 28, 1, 1);
+
+
+        opslag.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 Methode keuze = null;
@@ -191,6 +221,25 @@ public class InstellingTab extends GridPane {
 
                 }else throw new IllegalArgumentException("Je hebt heelemaal geen duurstekorting aangeduid");
 
+            }
+        });
+
+        kassabon.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                List<String> decoratorKeuzes = new ArrayList<>();
+                String input = null;
+
+                if (headerAlgBoodschap.isSelected()) {
+                    decoratorKeuzes.add("alg");
+                    input = algemeneInfo.getText();
+                }
+                if (HeaderdateTime.isSelected()) decoratorKeuzes.add("date");
+                if (FooterKorting.isSelected())decoratorKeuzes.add("kort");
+                if (FooterBtw.isSelected())decoratorKeuzes.add("btw");
+                if (FooterDanku.isSelected())decoratorKeuzes.add("danku");
+
+                decoratorSchrijver.write(decoratorKeuzes, input);
             }
         });
     }

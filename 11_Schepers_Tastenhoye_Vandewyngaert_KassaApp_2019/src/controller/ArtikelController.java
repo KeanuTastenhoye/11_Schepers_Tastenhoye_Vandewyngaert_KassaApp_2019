@@ -157,6 +157,7 @@ public class ArtikelController {
         return verkoopArtikels;
     }
 
+
     public double getAmountOfKorting() throws IOException, BiffException {
         double res=0;
         if(getKortingen().containsKey(KortingEnum.GROEP))
@@ -213,6 +214,7 @@ public class ArtikelController {
     public HashMap<KortingEnum,ArrayList<String>> getKortingen() throws IOException, BiffException {
         return lezer.load();
     }
+
 
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
         oudeArtikels.clear();
