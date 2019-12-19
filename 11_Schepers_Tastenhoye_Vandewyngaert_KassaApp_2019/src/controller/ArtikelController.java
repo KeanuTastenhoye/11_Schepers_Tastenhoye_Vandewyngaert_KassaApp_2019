@@ -163,7 +163,7 @@ public class ArtikelController {
         if(getKortingen().containsKey(KortingEnum.GROEP))
         {
             double groepskorting=0;
-            for(Artikel a: getAllScannedArtikels())
+            for(Artikel a: getAllScannedArtikelsv2())
             {
                 //System.out.println("KIJK HIERRRRRRRRRRRR"+getKortingen().get(KortingEnum.GROEP).get(0)+""+a.getArtikelGroep()+"h");
                 if(a.getArtikelGroep().equals(getKortingen().get(KortingEnum.GROEP).get(0)))
@@ -175,8 +175,8 @@ public class ArtikelController {
         }
         if(getKortingen().containsKey(KortingEnum.DREMPEL)) {
             double drempelkorting = 0;
-            if (getAllScannedArtikels().size() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(0))) {
-                for (Artikel a : getAllScannedArtikels()) {
+            if (getAllScannedArtikelsv2().size() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(0))) {
+                for (Artikel a : getAllScannedArtikelsv2()) {
                     if (a.getArtikelGroep() == getKortingen().get(KortingEnum.GROEP).get(1)) {
                         drempelkorting += (Double.parseDouble(a.getArtikelPrijs()))/100*20;
                     }
@@ -188,7 +188,7 @@ public class ArtikelController {
         if(getKortingen().containsKey(KortingEnum.DUURSTE)) {
             double duursteKorting = 0;
 
-            for (Artikel a : getAllScannedArtikels()) {
+            for (Artikel a : getAllScannedArtikelsv2()) {
                 if (Double.parseDouble(a.getArtikelPrijs())>duursteKorting) {
                     duursteKorting= (Double.parseDouble(a.getArtikelPrijs()));
                 }
@@ -205,7 +205,7 @@ public class ArtikelController {
     public double getTotalPriceScannedItems()
     {
         double res=0;
-        for(Artikel a:getAllScannedArtikels())
+        for(Artikel a:getAllScannedArtikelsv2())
         {
             res+=Double.parseDouble(a.getArtikelPrijs());
         }

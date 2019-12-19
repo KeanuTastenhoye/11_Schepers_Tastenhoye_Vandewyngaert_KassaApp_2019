@@ -2,9 +2,9 @@ package domain;
 
 public enum KortingEnum {
 
-    GROEP("groepskorting","domain.GroepsKorting"),
-    DREMPEL("drempelkorting","domain.DrempelKorting"),
-    DUURSTE("duurstekorting","domain.DuursteKorting");
+    GROEP("groep","domain.GroepsKorting"),
+    DREMPEL("drempel","domain.DrempelKorting"),
+    DUURSTE("duurste","domain.DuursteKorting");
 
     private final String omschrijving;
     private final String klassenaam;
