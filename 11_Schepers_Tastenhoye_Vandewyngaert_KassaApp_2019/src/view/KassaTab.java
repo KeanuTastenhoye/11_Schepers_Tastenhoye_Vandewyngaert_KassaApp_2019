@@ -2,6 +2,7 @@ package view;
 
 import controller.ArtikelController;
 
+import domain.Artikel;
 import domain.KortingEnum;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -163,7 +164,8 @@ public class KassaTab extends GridPane implements Observer {
         afsluiten.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                File file = new File("D:\\UCLL\\FASE_2\\OO Ontwerpen\\untitled\\src\\bestanden\\kortingStrategieProperties");
+                //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
 
                 try {
                     HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
@@ -201,8 +203,8 @@ public class KassaTab extends GridPane implements Observer {
                     List<String> decShit;
 
                     try {
-                        BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
-                        //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+                        //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+                        BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
 
                         while ((lijn = reader.readLine()) != null) {
                             if (lijn.charAt(0) != '#') {

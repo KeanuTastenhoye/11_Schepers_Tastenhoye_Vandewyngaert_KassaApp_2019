@@ -108,7 +108,37 @@ public class ArtikelController {
     }
     */
 
-    public Map<String, List<Artikel>> getVerkoopArtikelsNietDubbel(List<Artikel> kutlijst) throws BiffException, IOException {
+    public Map<String, List<String>> getVerkoopArtikelsNietDubbel(List<Artikel> kutlijst) throws BiffException, IOException {
+        Map<String, List<String>> artikelMap = new HashMap<>();
+        int aantal = 1;
+
+        for (Artikel a: kutlijst) {
+            //bestaand artikel aantal ++
+            if (artikelMap.containsKey(a.getArtikelNr())) {
+                int aantalInLijst = Integer.parseInt(artikelMap.get(a.getArtikelNr()).get(1)) + 1;
+
+                List<String> artikelLijst = new ArrayList<>();
+
+                artikelLijst.add(a.getArtikelNaam());
+                artikelLijst.add(String.valueOf(aantalInLijst));
+                artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.replace(a.getArtikelNr(), artikelLijst);
+
+            } else {//anders  gwn toevoegen aan de lijst
+                List<String> artikelLijst = new ArrayList<>();
+
+                artikelLijst.add(a.getArtikelNaam());
+                artikelLijst.add(String.valueOf(aantal));
+                artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.put(a.getArtikelNr(), artikelLijst);
+            }
+        }
+        return artikelMap;
+    }
+
+    public Map<String, List<Artikel>> getVerkoopArtikelsNietDubbelObserver(List<Artikel> kutlijst) throws BiffException, IOException {
         Map<String, List<Artikel>> artikelMap = new HashMap<>();
         //int aantal = 1;
 
@@ -350,7 +380,7 @@ public class ArtikelController {
     }
 
     public ObservableList<Artikel> getKlantObservable() throws BiffException, IOException {
-        ObservableList<Artikel> artikels = FXCollections.observableArrayList(mapToListArtikel(getVerkoopArtikelsNietDubbel(getAllScannedArtikelsv2())));
+        ObservableList<Artikel> artikels = FXCollections.observableArrayList(mapToListArtikel(getVerkoopArtikelsNietDubbelObserver(getAllScannedArtikelsv2())));
         return artikels;
     }
 }
