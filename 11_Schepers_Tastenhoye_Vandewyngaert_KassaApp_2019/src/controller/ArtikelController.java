@@ -175,7 +175,7 @@ public class ArtikelController {
         }
         if(getKortingen().containsKey(KortingEnum.DREMPEL)) {
             double drempelkorting = 0;
-            if (getAllScannedArtikelsv2().size() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(0))) {
+            if (getTotalPriceScannedItems() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(1))) {
                 for (Artikel a : getAllScannedArtikelsv2()) {
                     if (a.getArtikelGroep() == getKortingen().get(KortingEnum.GROEP).get(1)) {
                         drempelkorting += (Double.parseDouble(a.getArtikelPrijs()))/100*20;
