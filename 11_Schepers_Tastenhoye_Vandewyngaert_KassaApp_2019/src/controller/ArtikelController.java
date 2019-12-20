@@ -201,20 +201,17 @@ public class ArtikelController {
 
     public double getAmountOfKorting() throws IOException, BiffException {
         double res=0;
-        if(getKortingen().containsKey(KortingEnum.GROEP))
-        {
+        if(getKortingen().containsKey(KortingEnum.GROEP)) {
             double groepskorting=0;
-            for(Artikel a: getAllScannedArtikelsv2())
-            {
+            for(Artikel a: getAllScannedArtikelsv2()) {
                 //System.out.println("KIJK HIERRRRRRRRRRRR"+getKortingen().get(KortingEnum.GROEP).get(0)+""+a.getArtikelGroep()+"h");
-                if(a.getArtikelGroep().equals(getKortingen().get(KortingEnum.GROEP).get(0)))
-                {
+                if(a.getArtikelGroep().equals(getKortingen().get(KortingEnum.GROEP).get(0))) {
                     groepskorting+=(Double.parseDouble(a.getArtikelPrijs()))*Integer.parseInt(getKortingen().get(KortingEnum.GROEP).get(1))/100;
                 }
             }
             res+=groepskorting;
         }
-        if(getKortingen().containsKey(KortingEnum.DREMPEL)) {
+        if (getKortingen().containsKey(KortingEnum.DREMPEL)) {
             double drempelkorting = 0;
             if (getTotalPriceScannedItems() >= Integer.parseInt(getKortingen().get(KortingEnum.DREMPEL).get(1))) {
                 for (Artikel a : getAllScannedArtikelsv2()) {
@@ -226,7 +223,7 @@ public class ArtikelController {
             }
         }
 
-        if(getKortingen().containsKey(KortingEnum.DUURSTE)) {
+        if (getKortingen().containsKey(KortingEnum.DUURSTE)) {
             double duursteKorting = 0;
 
             for (Artikel a : getAllScannedArtikelsv2()) {
@@ -240,18 +237,16 @@ public class ArtikelController {
         }
         return res;
 
-
     }
 
-    public double getTotalPriceScannedItems()
-    {
+    public double getTotalPriceScannedItems() {
         double res=0;
-        for(Artikel a:getAllScannedArtikelsv2())
-        {
+        for(Artikel a:getAllScannedArtikelsv2()) {
             res+=Double.parseDouble(a.getArtikelPrijs());
         }
         return res;
     }
+
     public HashMap<KortingEnum,ArrayList<String>> getKortingen() throws IOException, BiffException {
         return lezer.load();
     }
