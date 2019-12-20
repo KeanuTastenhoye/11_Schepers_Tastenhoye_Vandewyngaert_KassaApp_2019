@@ -82,8 +82,6 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
         strategy.save(saveArtikels, file);
     }
 
-
-
     public ArrayList<Observer> getObservers() { return observers; }
 
     @Override
@@ -98,7 +96,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     }
 
     @Override
-    public void notifyObservers(ObservableList<String> klantlist) throws IOException, BiffException {
+    public void notifyObservers(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         for (Observer o: observers) {
             o.update(klantlist);
         }

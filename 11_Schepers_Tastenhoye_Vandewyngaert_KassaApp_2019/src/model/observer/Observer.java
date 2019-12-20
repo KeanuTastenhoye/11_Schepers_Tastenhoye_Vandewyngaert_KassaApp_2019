@@ -8,6 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Observer {
-    void update(ObservableList<String> klantlist) throws IOException, BiffException;
+    void update(ObservableList<Artikel> klantlist) throws IOException, BiffException;
 }
 

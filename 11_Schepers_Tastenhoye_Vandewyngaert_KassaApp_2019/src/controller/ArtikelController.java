@@ -138,10 +138,51 @@ public class ArtikelController {
         return artikelMap;
     }
 
+    public Map<String, List<Artikel>> getVerkoopArtikelsNietDubbelObserver(List<Artikel> kutlijst) throws BiffException, IOException {
+        Map<String, List<Artikel>> artikelMap = new HashMap<>();
+        //int aantal = 1;
+
+        for (Artikel a: kutlijst) {
+            //bestaand artikel aantal ++
+            if (artikelMap.containsKey(a.getArtikelNr())) {
+                //int aantalInLijst = Integer.parseInt(artikelMap.get(a.getArtikelNr()).get(1)) + 1;
+
+                List<Artikel> artikelLijst = new ArrayList<>();
+
+                Artikel artikel = new Artikel(a.getArtikelNr(), a.getArtikelNaam(), a.getArtikelGroep(), a.getArtikelPrijs(), a.getArtikelVoorraad());
+                artikelLijst.add(artikel);
+                //artikelLijst.add(a.getArtikelNaam());
+                //artikelLijst.add(String.valueOf(aantalInLijst));
+                //artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.replace(a.getArtikelNr(), artikelLijst);
+            } else {//anders  gwn toevoegen aan de lijst
+                List<Artikel> artikelLijst = new ArrayList<>();
+
+                Artikel artikel = new Artikel(a.getArtikelNr(), a.getArtikelNaam(), a.getArtikelGroep(), a.getArtikelPrijs(), a.getArtikelVoorraad());
+                artikelLijst.add(artikel);
+                //artikelLijst.add(a.getArtikelNaam());
+                //artikelLijst.add(String.valueOf(aantal));
+                //artikelLijst.add(a.getArtikelPrijs());
+
+                artikelMap.put(a.getArtikelNr(), artikelLijst);
+            }
+        }
+        return artikelMap;
+    }
+
 
     public List<String> mapToListString(Map<String, List<String>> artikels) {
         List<String> arts = new ArrayList<>();
 
+        for (String key:artikels.keySet()) {
+            arts.addAll(artikels.get(key));
+        }
+        return arts;
+    }
+
+    public List<Artikel> mapToListArtikel(Map<String, List<Artikel>> artikels) {
+        List<Artikel> arts = new ArrayList<>();
 
         for (String key:artikels.keySet()) {
             arts.addAll(artikels.get(key));
@@ -313,12 +354,9 @@ public class ArtikelController {
         }
     }
 
-    /*
     public void doObserver() throws IOException, BiffException {
         ArtikelDbInMemory.getInstance().notifyObservers(getKlantObservable());
     }
-
-    */
 
     //Observables
     public ObservableList<Artikel> getArtikelObservable() throws BiffException, IOException {
@@ -341,11 +379,8 @@ public class ArtikelController {
         return artikels;
     }
 
-    /*
-    public ObservableList<String> getKlantObservable() throws BiffException, IOException {
-        ObservableList<String> artikels = FXCollections.observableArrayList(mapToListString(getVerkoopArtikelsNietDubbel()));
+    public ObservableList<Artikel> getKlantObservable() throws BiffException, IOException {
+        ObservableList<Artikel> artikels = FXCollections.observableArrayList(mapToListArtikel(getVerkoopArtikelsNietDubbelObserver(getAllScannedArtikelsv2())));
         return artikels;
     }
-    */
-
 }

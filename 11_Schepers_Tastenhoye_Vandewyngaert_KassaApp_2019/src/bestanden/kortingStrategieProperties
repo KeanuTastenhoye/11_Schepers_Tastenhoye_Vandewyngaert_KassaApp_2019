@@ -1,5 +1,1 @@
-#Properties file
-#Fri Dec 13 11:57:43 CET 2019
-SubCategorie=gr1
-Categorie=groepskorting
-Percentage=34
+{SubCategorie=50, Categorie=drempel, Percentage=10}
