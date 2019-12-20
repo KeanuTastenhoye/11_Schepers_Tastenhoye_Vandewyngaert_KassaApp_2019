@@ -44,7 +44,7 @@ public abstract class Kassabon extends KassabonAbstract {
     }
 
     public String print(List<Artikel> artList) throws BiffException, IOException {
-        Map<String, List<String>> artMap = controller.getVerkoopArtikelsNietDubbel(artList);
+        Map<String, List<Artikel>> artMap = controller.getVerkoopArtikelsNietDubbel(artList);
 
         String decorator = "Omschrijving                 |Aantal       |Prijs  \n";
         decorator += "---------------------------------------------------\n";

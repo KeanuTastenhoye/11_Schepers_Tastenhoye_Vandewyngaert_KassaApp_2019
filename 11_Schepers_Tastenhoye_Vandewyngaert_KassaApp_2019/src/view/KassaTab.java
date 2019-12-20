@@ -95,7 +95,7 @@ public class KassaTab extends GridPane implements Observer {
                     } else {
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
-                        //artikelController.doObserver();
+                        artikelController.doObserver();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -197,7 +197,8 @@ public class KassaTab extends GridPane implements Observer {
     }
 
     @Override
-    public void update(ObservableList<String> klantlist) throws IOException, BiffException {
+    public void update(ObservableList<Artikel> klantlist) throws IOException, BiffException {
         artikelController.voorraadOmlaag(artNr);
+        table.refresh();
     }
 }
