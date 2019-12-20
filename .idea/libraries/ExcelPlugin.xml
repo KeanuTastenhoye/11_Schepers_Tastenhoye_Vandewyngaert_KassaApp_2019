@@ -1,11 +1,7 @@
 <component name="libraryTable">
   <library name="ExcelPlugin">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../../Jars/Jar/ExcelPlugin.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../../Jars/Jar/ExcelPlugin.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

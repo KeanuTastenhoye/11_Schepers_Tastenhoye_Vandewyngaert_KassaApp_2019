@@ -6,10 +6,19 @@ import jxl.read.biff.BiffException;
 import java.io.IOException;
 import java.util.List;
 
-public class FooterKorting  extends KassabonDecorator{
-    private  KassabonAbstract kassabon;
+public class FooterKorting  extends KassabonDecorator {
+    private KassabonAbstract kassabon;
     private  String text;
 
+    public FooterKorting(KassabonAbstract kassabon, String text) {
+        this.kassabon = kassabon;
+        this.text = text;
+    }
+
+    public FooterKorting(KassabonAbstract kassabon) {
+        this.kassabon = kassabon;
+        this.text = getText();
+    }
 
     @Override
     public String getText() {
