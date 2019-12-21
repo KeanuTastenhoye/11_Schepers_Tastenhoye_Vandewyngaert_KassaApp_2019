@@ -56,10 +56,11 @@ public class KassaTab extends GridPane implements Observer {
 
         Label totaalLabel = new Label("Totaal: ");
         Label bedragLabel = new Label("");
-        Label koritngTxt = new Label("Korting: ");
+        Label kortingTxt = new Label("Korting: ");
         Label kortingLabel = new Label("");
         Label versieringLabel = new Label("--------------------------------------");
         Label eindTotaal = new Label("Te betalen: ");
+        Label eindLabel = new Label("");
 
         TableColumn artikelNr = new TableColumn<>("Nr");
         TableColumn artikelNaam = new TableColumn<>("Naam");
@@ -169,13 +170,26 @@ public class KassaTab extends GridPane implements Observer {
 
                 try {
                     HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
-                    if(!koritngTxt.equals("") || kortingen.containsKey(KortingEnum.DREMPEL) && artikelController.getAllScannedArtikelsv2().size()<Integer.parseInt(kortingen.get(KortingEnum.DREMPEL).get(1))
+                    if(!kortingTxt.equals("") || kortingen.containsKey(KortingEnum.DREMPEL) && artikelController.getAllScannedArtikelsv2().size()<Integer.parseInt(kortingen.get(KortingEnum.DREMPEL).get(1))
                             ||kortingen.containsKey(KortingEnum.GROEP)&& artikelController.hasGroup(kortingen.get(KortingEnum.GROEP).get(1)))  {
-                        kortingLabel.setText("JA WADDE JE HEBT KORTING");
+                        //kortingLabel.setText("JA WADDE JE HEBT KORTING");
+                        /*
                         TextField korting = new TextField("prijs zonder korting: "+Double.toString(artikelController.getTotalPriceScannedItems())
                                 +" aantal korting: "+Double.toString(artikelController.getAmountOfKorting())
                                 +" totale prijs met korting: "+Double.toString(artikelController.getTotalPriceScannedItems()-artikelController.getAmountOfKorting()));
+
+                         */
+
+                        kortingLabel.setText(Double.toString(artikelController.getAmountOfKorting()));
+                        eindLabel.setText(Double.toString(artikelController.getTotalPriceScannedItems() - artikelController.getAmountOfKorting()));
+
+                        HBox korting = new HBox(kortingTxt, kortingLabel);
+                        HBox versiering = new HBox(versieringLabel);
+                        HBox eind = new HBox(eindTotaal, eindLabel);
+
                         add(korting, 0, 4, 1, 1);
+                        add(versiering, 0, 5, 1, 1);
+                        add(eind, 0, 6, 1, 1);
 
                     }
                 } catch (IOException e) {
@@ -183,11 +197,6 @@ public class KassaTab extends GridPane implements Observer {
                 } catch (BiffException e) {
                     e.printStackTrace();
                 }
-
-                HBox versiering = new HBox(versieringLabel);
-                HBox eindtotaal = new HBox(eindTotaal);
-                add(versiering, 0, 5, 1, 1);
-                add(eindTotaal, 0,6,1,1);
             }
         });
 
