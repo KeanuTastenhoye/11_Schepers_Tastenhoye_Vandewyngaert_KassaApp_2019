@@ -251,7 +251,6 @@ public class ArtikelController {
         return lezer.load();
     }
 
-
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
         oudeArtikels.clear();
         nieuweArtikels.clear();

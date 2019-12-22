@@ -213,7 +213,7 @@ public class InstellingTab extends GridPane {
 
                 if(duurstekorting.isSelected()){
                     korting = KortingEnum.DUURSTE;
-                    kortingSchrijver.write(KortingEnum.DUURSTE, duursteTXT.getText());
+                    kortingSchrijver.write(KortingEnum.DUURSTE,"geen", duursteTXT.getText());
 
                     if(duursteTXT != null &&! duursteTXT.getText().trim().isEmpty()){
                         System.out.println(duursteTXT.getText() + "% korting op de duurste art");

@@ -17,12 +17,10 @@ import java.util.Scanner;
 public class KortingLezer {
 
     public HashMap<KortingEnum, ArrayList<String>> load() throws BiffException, IOException {
-        //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-        File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-
         HashMap<KortingEnum, ArrayList<String>> kortingen = new HashMap<>();
         String inhoud;
-        //File file = new File("D:\\UCLL\\FASE_2\\OO Ontwerpen\\untitled\\src\\bestanden\\kortingStrategieProperties");
+        //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+        File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
 
         Scanner scannerFile = new Scanner(file);        // scanner voor File
         while (scannerFile.hasNextLine()) {                // voor elke lijn van het bestand
