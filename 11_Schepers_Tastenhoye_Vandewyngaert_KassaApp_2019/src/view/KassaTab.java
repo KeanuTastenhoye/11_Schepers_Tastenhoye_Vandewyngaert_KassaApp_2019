@@ -166,7 +166,8 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-                File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                File file = new File("./bestanden/kortingStrategieProperties");
 
                 try {
                     HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
