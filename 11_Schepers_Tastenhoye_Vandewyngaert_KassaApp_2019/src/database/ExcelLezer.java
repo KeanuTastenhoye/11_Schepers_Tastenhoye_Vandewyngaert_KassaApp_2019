@@ -32,28 +32,28 @@ public class ExcelLezer implements LoadSave {
     //Stuurt naar de ExcelPugin om de excel te lezen
     @Override
     public ArrayList<Artikel> load(File file) throws BiffException, IOException {
-
             ArrayList<ArrayList<String>> reader= excel.read(file);
             HashMap<String ,Artikel> map = new HashMap();
             ArrayList<Artikel> artikels=new ArrayList<>();
-            for (int i=0;i<reader.size();i++) {
 
-                Artikel a = new Artikel(reader.get(i).get(0),reader.get(i).get(1),reader.get(i).get(2)
-                        ,reader.get(i).get(3),reader.get(i).get(4));
+            for (int i=0; i < reader.size(); i++) {
+                Artikel a = new Artikel(reader.get(i).get(0),
+                                        reader.get(i).get(1),
+                                        reader.get(i).get(2),
+                                        reader.get(i).get(3),
+                                        reader.get(i).get(4));
                 map.put(a.getArtikelNr(), a);
-                }
-
+            }
 
             ArtikelDbInMemory artikelDB = ArtikelDbInMemory.getInstance();
             artikelDB.setArtikels(map);
 
-            for(Artikel a:map.values())
-            {
+            for(Artikel a: map.values()) {
                 artikels.add(a);
             }
+
             return artikels;
         }
-
 
     //Stuurt naar de ExcelPlugin om naar de excel te schrijven
     @Override

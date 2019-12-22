@@ -57,11 +57,8 @@ public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
         return artikels;
     }
 
-
     //Methode om naar de txt te schrijven
     @Override
-
-
     public void save(ArrayList<ArrayList<String>> args, File file) throws BiffException, IOException, RowsExceededException, WriteException {
 
         file = fact.getCorrectFile();
