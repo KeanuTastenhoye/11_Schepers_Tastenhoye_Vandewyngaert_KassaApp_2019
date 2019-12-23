@@ -26,10 +26,12 @@ public class KassaView  {
 
 		ArtikelController controller = new ArtikelController();
 
+		String s = controller.loggen();
+
 		KassaTab kassa = new KassaTab();
 		ArtikelTab artikel = new ArtikelTab();
 		InstellingTab instelling = new InstellingTab();
-		LogTab log = new LogTab();
+		LogTab log = new LogTab(s);
 
 		BorderPane borderPane = new KassaMainPane(kassa, artikel, instelling, log);
 
