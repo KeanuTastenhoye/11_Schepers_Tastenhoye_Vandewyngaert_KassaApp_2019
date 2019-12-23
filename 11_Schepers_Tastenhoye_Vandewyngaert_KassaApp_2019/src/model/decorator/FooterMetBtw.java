@@ -24,11 +24,11 @@ public class FooterMetBtw extends KassabonDecorator{
     public String getText() {
         //hier moet je naar de enum gaan
         //prijs zonder koring + korting bedrag meoten hier komen
-        return "dit is hoe veel btw er is : \n";
+        return "dit is hoe veel btw er is : ";
     }
 
     @Override
     public String print(List<Artikel> artList) throws BiffException, IOException {
-        return kassabon.print(artList) + getText();
+        return kassabon.print(artList) + getText() + (getTotaalPrijs(artList) * 0.06) + " EUR. Dus " + (getTotaalPrijs(artList) - (getTotaalPrijs(artList) * 0.06)) + " EUR (excl BTW)" ;
     }
 }

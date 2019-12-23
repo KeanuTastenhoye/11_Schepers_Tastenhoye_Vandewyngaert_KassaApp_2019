@@ -105,6 +105,8 @@ public class KassaTab extends GridPane implements Observer {
                         alert.showAndWait();
                     } else {
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
+                        totaalLabel.setVisible(true);
+                        bedragLabel.setVisible(true);
                         bedragLabel.setText(Double.toString(artikelController.getVerkoopPrijs(artikelNrke)));
                         artikelController.doObserver();
                     }
@@ -149,13 +151,13 @@ public class KassaTab extends GridPane implements Observer {
                     table.getItems().clear();
                     bedragLabel.setText("");
                 }
-                else
-                {
+                else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText("On Hold");
                     alert.setContentText("Er kan maar 1 verkoopsessie on hold worden gezet.");
                     alert.showAndWait();
-                }            }
+                }
+            }
         });
 
         continu.setOnAction(new EventHandler<ActionEvent>() {
@@ -165,6 +167,8 @@ public class KassaTab extends GridPane implements Observer {
                     artikelController.resetVerkoopsessies();
                     klantNaOnHoldCounter = 0;
                     table.getItems().clear();
+                    totaalLabel.setVisible(true);
+                    bedragLabel.setVisible(true);
                     bedragLabel.setText("");
                     table.setItems(artikelController.getOnHoldObservable());
                     bedragLabel.setText(Double.toString(artikelController.getOnHoldPrijs()));
@@ -179,8 +183,7 @@ public class KassaTab extends GridPane implements Observer {
         afsluiten.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-                //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
 
                 try {
                     HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
@@ -193,6 +196,11 @@ public class KassaTab extends GridPane implements Observer {
                                 +" totale prijs met korting: "+Double.toString(artikelController.getTotalPriceScannedItems()-artikelController.getAmountOfKorting()));
 
                          */
+                        kortingTxt.setVisible(true);
+                        kortingLabel.setVisible(true);
+                        versieringLabel.setVisible(true);
+                        eindTotaal.setVisible(true);
+                        eindLabel.setVisible(true);
 
                         kortingLabel.setText(Double.toString(artikelController.getAmountOfKorting()));
                         eindLabel.setText(Double.toString(artikelController.getTotalPriceScannedItems() - artikelController.getAmountOfKorting()));
@@ -217,19 +225,18 @@ public class KassaTab extends GridPane implements Observer {
         betalen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("kL = " +kortingLabel + "\n" +
-                        "eL = " + eindLabel + "\n" +
-                        "kT = " + kortingTxt + "\n"+
-                        "eT = " + eindTotaal + "\n" +
-                        "v  = " + versieringLabel + "\n"+
-                        totaal + totaalLabel);
-
-                kortingLabel.setText(null);
-                eindLabel.setText(null);
-                kortingTxt.setText(null);
-                eindTotaal.setVisible(false);
-                versieringLabel.setVisible(false);
                 try {
+                    totaalLabel.setText("Totaal: ");
+                    totaalLabel.setVisible(false);
+                    bedragLabel.setText("");
+                    kortingTxt.setText("Korting: ");
+                    kortingTxt.setVisible(false);
+                    kortingLabel.setText("");
+                    versieringLabel.setText("--------------------------------------");
+                    versieringLabel.setVisible(false);
+                    eindTotaal.setText("Te betalen: ");
+                    eindTotaal.setVisible(false);
+                    eindLabel.setText("");
 
                     KassabonAbstract kassabon = new Kassabon(artikelController.getAmountOfKorting()) {};
                     String lijn;
@@ -252,30 +259,36 @@ public class KassaTab extends GridPane implements Observer {
                                     }
                                 }
                                 if (lijn.substring(0,6).equals("Input=")) {
-                                    inputVeld = lijn.substring(7);
+                                    if (lijn.length() > 6) {
+                                        inputVeld = lijn.substring(6);
+                                    }
                                 }
                                 if (lijn.substring(0, 6).equals("Keuze=")) {
                                    List<String> lijst = new ArrayList<>();
                                    lijst.add(lijn.substring(7, haakjePlaats));
 
                                    for (String s: lijst) {
-                                       decKeuzes = s.split(" , ");
+                                       decKeuzes = s.split(",");
                                        decShit = new ArrayList<>(Arrays.asList(decKeuzes));
 
                                        for (String str: decShit) {
-                                            if (str.equals("alg")) {
-                                                kassabon = new HeaderMetAlgInfo(kassabon, inputVeld);
+                                            if (str.equals("alg") || str.equals(" alg")) {
+                                                if (inputVeld != null) {
+                                                    kassabon = new HeaderMetAlgInfo(kassabon, inputVeld);
+                                                } else {
+                                                    kassabon = new HeaderMetAlgInfo(kassabon);
+                                                }
                                             }
-                                            if (str.equals("date")) {
+                                            if (str.equals("date") || str.equals(" date")) {
                                                 kassabon = new HeaderMetDatumEnTijd(kassabon);
                                             }
-                                            if (str.equals("kort")) {
+                                            if (str.equals("kort") || str.equals(" kort")) {
                                                 kassabon = new FooterKorting(kassabon);
                                             }
-                                            if (str.equals("btw")) {
+                                            if (str.equals("btw") || str.equals(" btw")) {
                                                 kassabon = new FooterMetBtw(kassabon);
                                             }
-                                            if (str.equals("danku")) {
+                                            if (str.equals("danku") || str.equals(" danku")) {
                                                 kassabon = new FooterMetBericht(kassabon);
                                             }
                                        }

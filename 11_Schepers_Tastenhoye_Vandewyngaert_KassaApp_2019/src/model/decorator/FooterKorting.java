@@ -9,6 +9,7 @@ import java.util.List;
 public class FooterKorting  extends KassabonDecorator {
     private KassabonAbstract kassabon;
     private  String text;
+    private double prijs;
 
     public FooterKorting(KassabonAbstract kassabon, String text) {
         this.kassabon = kassabon;
@@ -22,13 +23,12 @@ public class FooterKorting  extends KassabonDecorator {
 
     @Override
     public String getText() {
-        //hier moet je naar de enum gaan
-        //prijs zonder koring + korting bedrag meoten hier komen
-        return "Ohh wat leuk, je hebt korting: \n";
+        return "Ohh wat leuk, je hebt korting, anders moet je : ";
     }
 
     @Override
     public String print(List<Artikel> artList) throws BiffException, IOException {
-        return kassabon.print(artList) + getText();
+        this.prijs = getTotaalPrijs(artList);
+        return kassabon.print(artList) + getText() + prijs + " EUR betalen";
     }
 }

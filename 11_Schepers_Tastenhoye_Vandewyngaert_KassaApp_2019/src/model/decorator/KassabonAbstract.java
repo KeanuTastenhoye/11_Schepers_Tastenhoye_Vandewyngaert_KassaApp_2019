@@ -12,6 +12,14 @@ public abstract class KassabonAbstract {
     public String getText(){
         return text;
     }
-    //public abstract Double getPrijs();
+
+    public double getTotaalPrijs(List<Artikel> artikels){
+        double totaal = 0;
+
+        for (Artikel a: artikels) {
+            totaal += Double.parseDouble(a.getArtikelPrijs());
+        }
+        return totaal;
+    }
     public abstract String print(List<Artikel> artList) throws BiffException, IOException;
 }

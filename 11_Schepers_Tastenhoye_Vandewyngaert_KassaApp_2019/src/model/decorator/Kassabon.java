@@ -13,7 +13,6 @@ public abstract class Kassabon extends KassabonAbstract {
     private ArtikelController controller;
     private Double korting;
 
-
     public Kassabon() {
         controller = new ArtikelController();
     }
@@ -26,17 +25,6 @@ public abstract class Kassabon extends KassabonAbstract {
     public Double getKorting() {
         return korting;
     }
-
-    // Get aantal per gescand product
-    public double getTotaalPrijs(List<Artikel> artikels){
-        double totaal = 0;
-
-        for (Artikel a: artikels) {
-            totaal += Double.parseDouble(a.getArtikelPrijs());
-        }
-        return totaal;
-    }
-
 
     private List<Artikel> getPrintableListVanArtikels() throws BiffException, IOException {
         List<Artikel> artikels1 = controller.getAllScannedArtikels();
@@ -64,9 +52,7 @@ public abstract class Kassabon extends KassabonAbstract {
 
         decorator += "---------------------------------------------------\n";
         //KORTING MOET ER NOG AF GETROKKEN WORDEN
-        decorator += "Betaald (excl korting)                        " + (getTotaalPrijs(artList) - getKorting()) + " EUR\n";
+        decorator += "Betaald (incl korting)                        " + (getTotaalPrijs(artList) - getKorting()) + " EUR\n";
         return decorator;
     }
-
-
 }

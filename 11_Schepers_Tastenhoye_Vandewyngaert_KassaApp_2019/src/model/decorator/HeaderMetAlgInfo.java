@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class HeaderMetAlgInfo extends KassabonDecorator {
-
     KassabonAbstract kassabon;
     String text;
 
@@ -29,6 +28,6 @@ public class HeaderMetAlgInfo extends KassabonDecorator {
 
     @Override
     public String print(List<Artikel> artList) throws BiffException, IOException {
-        return getText() + kassabon.print(artList);
+        return this.text + "\n" +  kassabon.print(artList);
     }
 }

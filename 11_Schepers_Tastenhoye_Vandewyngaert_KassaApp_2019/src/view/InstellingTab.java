@@ -237,11 +237,15 @@ public class InstellingTab extends GridPane {
                     input = algemeneInfo.getText();
                 }
                 if (HeaderdateTime.isSelected()) decoratorKeuzes.add("date");
-                if (FooterKorting.isSelected())decoratorKeuzes.add("kort");
-                if (FooterBtw.isSelected())decoratorKeuzes.add("btw");
-                if (FooterDanku.isSelected())decoratorKeuzes.add("danku");
+                if (FooterKorting.isSelected()) decoratorKeuzes.add("kort");
+                if (FooterBtw.isSelected()) decoratorKeuzes.add("btw");
+                if (FooterDanku.isSelected()) decoratorKeuzes.add("danku");
 
-                decoratorSchrijver.write(decoratorKeuzes, input);
+                if (input != null) {
+                    decoratorSchrijver.write(decoratorKeuzes, input);
+                } else {
+                    decoratorSchrijver.write(decoratorKeuzes);
+                }
             }
         });
 

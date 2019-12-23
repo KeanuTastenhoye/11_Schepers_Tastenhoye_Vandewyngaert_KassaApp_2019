@@ -23,4 +23,14 @@ public class DecoratorWriter {
             e.printStackTrace();
         }
     }
+    public void write(List<String> keuze) {
+        try {
+            property.setProperty("Keuze", keuze.toString());
+            File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties");
+            OutputStream out = new FileOutputStream(file);
+            property.store(out, "Properties file");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

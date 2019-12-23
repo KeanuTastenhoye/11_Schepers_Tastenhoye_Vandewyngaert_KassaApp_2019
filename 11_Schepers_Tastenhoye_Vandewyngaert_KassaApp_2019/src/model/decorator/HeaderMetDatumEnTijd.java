@@ -22,13 +22,11 @@ public class HeaderMetDatumEnTijd extends KassabonDecorator {
         this.text = getText();
     }
 
-
     @Override
     public String getText() {
         //hier moet je naar de enum gaan
-
         LocalDateTime now = LocalDateTime.now();
-        return now +" \n";
+        return now + " \n";
     }
 
 
