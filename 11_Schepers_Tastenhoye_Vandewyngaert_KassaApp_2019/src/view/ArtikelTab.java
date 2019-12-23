@@ -54,4 +54,5 @@ public class ArtikelTab extends GridPane implements Observer {
         //Vul de table opnieuw na voorraad aanpassing van kassaTab
         table.refresh();
     }
+
 }

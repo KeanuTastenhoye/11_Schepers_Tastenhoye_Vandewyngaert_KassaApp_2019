@@ -101,6 +101,7 @@ public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
             o.update(klantlist);
         }
     }
+
     /*
     public void notifyObservers() throws IOException, BiffException {
         for (int i = 0; i < observers.size(); i++) {

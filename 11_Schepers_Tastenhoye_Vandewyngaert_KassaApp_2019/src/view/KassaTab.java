@@ -293,8 +293,8 @@ public class KassaTab extends GridPane implements Observer {
                     }
 
                     System.out.println(kassabon.print(artikelController.getAllScannedArtikelsv2()));
-
                     artikelController.setLoggen(artikelController.getTotalPriceScannedItems(), artikelController.getAmountOfKorting());
+                    LogTab lt = new LogTab(artikelController.loggen());
 
                     totaalLabel.setText("Totaal: ");
                     totaalLabel.setVisible(false);
@@ -344,4 +344,5 @@ public class KassaTab extends GridPane implements Observer {
         artikelController.voorraadOmlaag(artNr);
         table.refresh();
     }
+
 }

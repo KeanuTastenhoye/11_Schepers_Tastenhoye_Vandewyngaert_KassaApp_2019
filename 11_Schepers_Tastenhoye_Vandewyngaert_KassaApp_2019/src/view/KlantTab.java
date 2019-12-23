@@ -9,7 +9,10 @@ import javafx.scene.layout.HBox;
 
 import domain.Artikel;
 
+import jxl.read.biff.BiffException;
 import model.observer.Observer;
+
+import java.io.IOException;
 
 public class KlantTab extends GridPane implements Observer {
 
@@ -29,7 +32,6 @@ public class KlantTab extends GridPane implements Observer {
     @Override
     public void update(ObservableList<Artikel> klantlist) {
         //System.out.println("Verkregen klanten list: " + klantlist);
-
 
         if (checkTableColumn(table, "Nr") && checkTableColumn(table, "Naam") &&
             checkTableColumn(table, "Groep") && checkTableColumn(table, "Prijs") && checkTableColumn(table, "Voorraad")) {
@@ -71,4 +73,5 @@ public class KlantTab extends GridPane implements Observer {
             add(table, 0, 4, 2, 2);
         }
     }
+
 }
