@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +35,10 @@ public class ArtikelController {
     private KortingLezer lezer;
     //private double prijs;
     //private double onHoldPrijs;
+    private LocalDateTime now;
+    private Double totaalBedrag;
+    private Double korting;
+    private Double teBetalenBedrag;
 
     private Stage stage;
 
@@ -225,6 +230,16 @@ public class ArtikelController {
         return artikels;
     }
 
+    public void setLoggen(Double prijs, Double kort) {
+        now = LocalDateTime.now();
+        totaalBedrag = prijs;
+        korting = kort;
+        teBetalenBedrag = totaalBedrag - korting;
+    }
+
+    public String loggen() {
+        return "BETAALD " + now + " - " + totaalBedrag + " - " + korting + " - " + teBetalenBedrag;
+    }
 
     public double getAmountOfKorting() throws IOException, BiffException {
         double res=0;

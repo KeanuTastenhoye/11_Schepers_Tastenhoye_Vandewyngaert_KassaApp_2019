@@ -21,5 +21,6 @@ public abstract class KassabonAbstract {
         }
         return totaal;
     }
+
     public abstract String print(List<Artikel> artList) throws BiffException, IOException;
 }

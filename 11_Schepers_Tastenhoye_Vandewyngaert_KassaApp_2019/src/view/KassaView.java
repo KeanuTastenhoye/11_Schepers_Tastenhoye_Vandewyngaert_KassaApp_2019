@@ -28,8 +28,9 @@ public class KassaView  {
 		KassaTab kassa = new KassaTab();
 		ArtikelTab artikel = new ArtikelTab();
 		InstellingTab instelling = new InstellingTab();
+		LogTab log = new LogTab();
 
-		BorderPane borderPane = new KassaMainPane(kassa, artikel, instelling);
+		BorderPane borderPane = new KassaMainPane(kassa, artikel, instelling, log);
 
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());

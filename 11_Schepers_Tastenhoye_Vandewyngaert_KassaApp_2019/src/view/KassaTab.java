@@ -74,7 +74,6 @@ public class KassaTab extends GridPane implements Observer {
         artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
         artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
 
-
         table = new TableView<String>();
         table.setPrefWidth(REMAINING);
         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
@@ -294,6 +293,9 @@ public class KassaTab extends GridPane implements Observer {
                     }
 
                     System.out.println(kassabon.print(artikelController.getAllScannedArtikelsv2()));
+
+                    artikelController.setLoggen(artikelController.getTotalPriceScannedItems(), artikelController.getAmountOfKorting());
+
                     totaalLabel.setText("Totaal: ");
                     totaalLabel.setVisible(false);
                     bedragLabel.setText("");
@@ -308,7 +310,6 @@ public class KassaTab extends GridPane implements Observer {
                     artikelCodeText.setText("");
                     table.getItems().clear();
                     artikelController.emptyList();
-
                 } catch (BiffException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

@@ -23,7 +23,7 @@ public class FooterKorting  extends KassabonDecorator {
 
     @Override
     public String getText() {
-        return "Ohh wat leuk, je hebt korting, anders moet je : ";
+        return "Ohh wat leuk, je hebt korting, anders moest je : ";
     }
 
     @Override

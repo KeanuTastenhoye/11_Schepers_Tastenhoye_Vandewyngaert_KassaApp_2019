@@ -6,17 +6,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 public class KassaMainPane extends BorderPane {
-    public KassaMainPane(Pane kassaTab, Pane artikelTab, Pane instellingTab){
+    public KassaMainPane(Pane kassaTab, Pane artikelTab, Pane instellingTab, Pane logTab){
         TabPane tabPane = new TabPane();
         Tab kassasTab = new Tab("Kassa", kassaTab);
         Tab artikelsTab = new Tab("Artikelen", artikelTab);
         Tab instellingsTab = new Tab("Instellingen", instellingTab);
-        Tab logTab = new Tab("Log");
+        Tab logsTab = new Tab("Log", logTab);
 
         tabPane.getTabs().add(kassasTab);
         tabPane.getTabs().add(artikelsTab);
         tabPane.getTabs().add(instellingsTab);
-        tabPane.getTabs().add(logTab);
+        tabPane.getTabs().add(logsTab);
 
         this.setCenter(tabPane);
     }
