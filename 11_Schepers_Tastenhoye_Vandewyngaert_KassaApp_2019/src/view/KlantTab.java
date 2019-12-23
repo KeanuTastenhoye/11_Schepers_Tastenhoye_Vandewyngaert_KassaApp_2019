@@ -11,10 +11,11 @@ import domain.Artikel;
 
 import jxl.read.biff.BiffException;
 import model.observer.Observer;
-//@author Phloy,Keanu,Eline
 
 import java.io.IOException;
-
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 public class KlantTab extends GridPane implements Observer {
 
     TableView table = new TableView<String>();

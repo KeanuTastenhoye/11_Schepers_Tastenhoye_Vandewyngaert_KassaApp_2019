@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-//@author Phloy
+/**
+ * //@author Phloy
+ */
 
 public abstract class Kassabon extends KassabonAbstract {
     private ArtikelController controller;

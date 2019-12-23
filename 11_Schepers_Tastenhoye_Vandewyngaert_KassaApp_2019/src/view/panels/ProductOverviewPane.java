@@ -11,7 +11,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-
+/**
+ * //@author Keanu
+ */
 public class ProductOverviewPane extends GridPane {
 	//private TableView<Product> table;
 	

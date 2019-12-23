@@ -6,7 +6,9 @@ import jxl.read.biff.BiffException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
-//@author Phloy
+/**
+ * //@author Phloy
+ */
 
 public class HeaderMetDatumEnTijd extends KassabonDecorator {
 

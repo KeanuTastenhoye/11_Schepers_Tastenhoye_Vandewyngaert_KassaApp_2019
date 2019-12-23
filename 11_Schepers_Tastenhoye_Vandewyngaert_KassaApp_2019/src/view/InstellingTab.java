@@ -19,7 +19,9 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-//@author Phloy,Keanu,Eline
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 
 public class InstellingTab extends GridPane {
     private PropertySchrijver schrijver;

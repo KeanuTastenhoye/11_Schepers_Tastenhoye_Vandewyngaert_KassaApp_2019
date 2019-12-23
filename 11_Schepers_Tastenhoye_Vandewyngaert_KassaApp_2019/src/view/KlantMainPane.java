@@ -4,8 +4,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-//@author Eline
-
+/**
+ * //@author Eline
+ */
 public class KlantMainPane extends BorderPane {
     public KlantMainPane(Pane klantTab) {
         TabPane tabPane = new TabPane();

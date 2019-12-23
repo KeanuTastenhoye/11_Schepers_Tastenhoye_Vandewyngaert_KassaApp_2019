@@ -10,8 +10,9 @@ import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 
 import java.io.IOException;
-//@author Eline
-
+/**
+ * //@author Eline
+ */
 public class KassaView  {
 	private Stage stage = new Stage();
 

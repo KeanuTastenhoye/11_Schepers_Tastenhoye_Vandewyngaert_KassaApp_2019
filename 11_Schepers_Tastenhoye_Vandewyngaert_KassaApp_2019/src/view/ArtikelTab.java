@@ -15,7 +15,9 @@ import jxl.read.biff.BiffException;
 import model.observer.Observer;
 
 import java.io.IOException;
-//@author Phloy,Keanu,Eline
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 
 public class ArtikelTab extends GridPane implements Observer {
     private TableView table;
