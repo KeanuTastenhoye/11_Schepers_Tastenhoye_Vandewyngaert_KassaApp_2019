@@ -31,6 +31,8 @@ public class HeaderMetDatumEnTijd extends KassabonDecorator {
         return now +" \n";
     }
 
+
+
     @Override
     public String print(List<Artikel> artList)throws BiffException, IOException {
         return getText() + kassabon.print(artList);

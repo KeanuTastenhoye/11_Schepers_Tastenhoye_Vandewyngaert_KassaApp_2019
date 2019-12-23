@@ -11,12 +11,21 @@ import java.util.Map;
 
 public abstract class Kassabon extends KassabonAbstract {
     private ArtikelController controller;
+    private Double korting;
 
 
     public Kassabon() {
         controller = new ArtikelController();
     }
 
+    public Kassabon(double korting) {
+        this.korting = korting;
+        controller = new ArtikelController();
+    }
+
+    public Double getKorting() {
+        return korting;
+    }
 
     // Get aantal per gescand product
     public double getTotaalPrijs(List<Artikel> artikels){
@@ -55,7 +64,7 @@ public abstract class Kassabon extends KassabonAbstract {
 
         decorator += "---------------------------------------------------\n";
         //KORTING MOET ER NOG AF GETROKKEN WORDEN
-        decorator += "Betaald (excl korting)                        " + controller.getAmountOfKorting() + " EUR\n";
+        decorator += "Betaald (excl korting)                        " + (getTotaalPrijs(artList) - getKorting()) + " EUR\n";
         return decorator;
     }
 

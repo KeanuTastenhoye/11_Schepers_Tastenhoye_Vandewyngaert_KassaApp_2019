@@ -12,5 +12,6 @@ public abstract class KassabonAbstract {
     public String getText(){
         return text;
     }
+    //public abstract Double getPrijs();
     public abstract String print(List<Artikel> artList) throws BiffException, IOException;
 }

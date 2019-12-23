@@ -218,8 +218,21 @@ public class KassaTab extends GridPane implements Observer {
         betalen.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                System.out.println("kL = " +kortingLabel + "\n" +
+                        "eL = " + eindLabel + "\n" +
+                        "kT = " + kortingTxt + "\n"+
+                        "eT = " + eindTotaal + "\n" +
+                        "v  = " + versieringLabel + "\n"+
+                        totaal + totaalLabel);
+
+                kortingLabel.setText(null);
+                eindLabel.setText(null);
+                kortingTxt.setText(null);
+                eindTotaal.setVisible(false);
+                versieringLabel.setVisible(false);
                 try {
-                    KassabonAbstract kassabon = new Kassabon() {};
+
+                    KassabonAbstract kassabon = new Kassabon(artikelController.getAmountOfKorting()) {};
                     String lijn;
                     String inputVeld = null;
                     int haakjePlaats = 0;
@@ -230,8 +243,8 @@ public class KassaTab extends GridPane implements Observer {
                         if(!artikelController.getOnHold().isEmpty()) {
                             artikelController.addVerkoopsessie();
                         }
-                        //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
-                        BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+                        BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
+                        //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
 
                         while ((lijn = reader.readLine()) != null) {
                             if (lijn.charAt(0) != '#') {
