@@ -12,11 +12,9 @@ import java.util.Map;
 public abstract class Kassabon extends KassabonAbstract {
     private ArtikelController controller;
 
-
     public Kassabon() {
         controller = new ArtikelController();
     }
-
 
     // Get aantal per gescand product
     public double getTotaalPrijs(List<Artikel> artikels){
@@ -27,7 +25,6 @@ public abstract class Kassabon extends KassabonAbstract {
         }
         return totaal;
     }
-
 
     private List<Artikel> getPrintableListVanArtikels() throws BiffException, IOException {
         List<Artikel> artikels1 = controller.getAllScannedArtikels();
@@ -58,6 +55,4 @@ public abstract class Kassabon extends KassabonAbstract {
         decorator += "Betaald (incl korting)                        " + getTotaalPrijs(artList) + " EUR\n";
         return decorator;
     }
-
-
 }

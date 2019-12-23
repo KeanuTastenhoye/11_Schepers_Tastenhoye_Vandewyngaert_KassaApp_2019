@@ -28,17 +28,17 @@ public class KlantTab extends GridPane implements Observer {
 
     @Override
     public void update(ObservableList<Artikel> klantlist) {
-        System.out.println("Verkregen klanten list: " + klantlist);
+        //System.out.println("Verkregen klanten list: " + klantlist);
 
 
         if (checkTableColumn(table, "Nr") && checkTableColumn(table, "Naam") &&
             checkTableColumn(table, "Groep") && checkTableColumn(table, "Prijs") && checkTableColumn(table, "Voorraad")) {
-            System.out.println("De tabel bestaat al.");
+            //System.out.println("De tabel bestaat al.");
 
             table.setItems(klantlist);
             table.refresh();
         } else {
-            System.out.println("De tabel bestaat nog niet.");
+            //System.out.println("De tabel bestaat nog niet.");
 
             setPadding(new Insets(5,5,5,5));
             setVgap(5);

@@ -30,12 +30,8 @@ public class KortingLezer {
             scannerLijn.useDelimiter(", ");
             //System.out.println(scannerLijn.next());// scheidingstekens van verschillende delen in de huidige lijn
             String categorie = scannerLijn.next().toUpperCase();// eerste deel huidige lijn tot aan /
-            System.out.println("categorie "+categorie);
             String subcategorie = scannerLijn.next();                // tweede deel huidige lijn tot aan /
-            System.out.println(subcategorie);
             String percentage = scannerLijn.next();                // tweede deel huidige lijn tot aan /
-            //percentage=percentage.substring(0,percentage.length()-1);
-            System.out.println(percentage);
             if (!kortingen.containsKey(KortingEnum.valueOf(categorie))||kortingen.get(KortingEnum.valueOf(categorie)).isEmpty()) {
                 kortingen.put(KortingEnum.valueOf(categorie),new ArrayList<>());
             }
@@ -43,9 +39,6 @@ public class KortingLezer {
 
             kortingen.get(KortingEnum.valueOf(categorie)).add(subcategorie);
             kortingen.get(KortingEnum.valueOf(categorie)).add(percentage);
-        }
-        for (KortingEnum e: kortingen.keySet()) {
-            System.out.println(e.toString());
         }
         return kortingen;
     }
