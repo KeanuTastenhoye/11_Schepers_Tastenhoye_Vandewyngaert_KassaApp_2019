@@ -88,6 +88,14 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    System.out.println("verkoop sessies: "+artikelController.getAantalVerkoopSessies());;
+                    if(artikelController.getAantalVerkoopSessies()>3)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Error aantal verkoop sessies na on hold");
+                        alert.setContentText("U moet eerst verder gaan met de verkoop sessie die on hold is gezet aangezien er al 3 mensen zijn gepasseerd!");
+                        alert.showAndWait();
+                    }
                     String artikelNrke = artikelCodeText.getText();
                     artNr = artikelNrke;
 
@@ -136,26 +144,33 @@ public class KassaTab extends GridPane implements Observer {
         onHold.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (klantNaOnHoldCounter<3) {
-                    klantNaOnHoldCounter++;
+                if (artikelController.getOnHold().isEmpty()) {
                     artikelController.setOnHold();
                     artikelController.setOnHoldPrijs();
                     table.getItems().clear();
                     bedragLabel.setText("");
                 }
-            }
+                else
+                {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText("On Hold");
+                    alert.setContentText("Er kan maar 1 verkoopsessie on hold worden gezet.");
+                    alert.showAndWait();
+                }            }
         });
 
         continu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
+                    artikelController.resetVerkoopsessies();
                     klantNaOnHoldCounter = 0;
                     table.getItems().clear();
                     bedragLabel.setText("");
                     table.setItems(artikelController.getOnHoldObservable());
-                    artikelController.clearOnHold();
                     bedragLabel.setText(Double.toString(artikelController.getOnHoldPrijs()));
+                    artikelController.clearOnHold();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -166,7 +181,8 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-                File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+                File file = new File("./bestanden/kortingStrategieProperties");
 
                 try {
                     HashMap<KortingEnum, ArrayList<String>> kortingen= artikelController.getKortingen();
@@ -212,6 +228,9 @@ public class KassaTab extends GridPane implements Observer {
                     List<String> decShit;
 
                     try {
+                        if(!artikelController.getOnHold().isEmpty()) {
+                            artikelController.addVerkoopsessie();
+                        }
                         //BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
                         BufferedReader reader = new BufferedReader(new FileReader("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\DecoratorKassabonProperties"));
 

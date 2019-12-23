@@ -12,7 +12,6 @@ public class LoadSaveFactory {
         if (strategie.equals("Tekst")) {
             setOpslagMethode(Methode.TEXT);
             return TekstLezer.getInstance();
-
             //ls = new TekstLezer();
         } else if (strategie.equals("Excel")) {
             setOpslagMethode(Methode.EXCEL);
@@ -21,7 +20,6 @@ public class LoadSaveFactory {
         } else {
             throw new IllegalArgumentException("Volgende strategie is niet geimplementeerd in deze app.: " + strategie);
         }
-
         //return ls;
     }
 

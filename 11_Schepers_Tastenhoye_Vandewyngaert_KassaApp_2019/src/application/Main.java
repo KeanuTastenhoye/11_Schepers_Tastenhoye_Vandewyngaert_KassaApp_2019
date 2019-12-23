@@ -27,7 +27,7 @@ public class Main extends Application {
 		factory.maakLoadSaveStrategie(service.getStrategy());
 
 		KassaTab kassaTab = new KassaTab();
-		ArtikelTab artikelTab= new ArtikelTab();
+		ArtikelTab artikelTab = new ArtikelTab();
 		KlantTab klantTab = new KlantTab();
 
 		ArtikelDbInMemory.getInstance().addObserver(kassaTab);
@@ -37,13 +37,6 @@ public class Main extends Application {
 		KassaView kav = new KassaView();
 		KlantView klv = new KlantView();
 	}
-
-	/*
-	private void registerObserversInView() {
-		service.getArtikelDB().registerObserver(articleOverviewPane);
-		service.getOrderDBLocal().registerObserver(orderOverviewPane);
-	}
-	*/
 
 	public static void main(String[] args) {
 		launch(args);
