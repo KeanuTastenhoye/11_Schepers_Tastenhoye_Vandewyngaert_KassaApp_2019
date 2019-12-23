@@ -1,8 +1,9 @@
 package database;
 
 import java.io.File;
-//@author Phloy,Keanu
-
+/**
+ * //@author Phloy,Keanu
+ */
 public class LoadSaveFactory {
 
     private Service s = new Service();

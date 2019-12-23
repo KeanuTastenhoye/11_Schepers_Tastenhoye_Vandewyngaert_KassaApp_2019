@@ -1,5 +1,7 @@
 package domain;
-//@author Eline
+/**
+ * //@author Eline
+ */
 public interface KortingStrategy {
 
     int getKorting();

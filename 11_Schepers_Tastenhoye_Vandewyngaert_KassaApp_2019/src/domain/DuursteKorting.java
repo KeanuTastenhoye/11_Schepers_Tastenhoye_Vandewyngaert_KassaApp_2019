@@ -1,7 +1,9 @@
 package domain;
 
 import database.ArtikelDbInMemory;
-//@author Eline
+/**
+ * //@author Eline
+ */
 public class DuursteKorting implements KortingStrategy {
 
     private int korting;

@@ -8,7 +8,9 @@ import jxl.write.biff.RowsExceededException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-//@author Keanu
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 
 public abstract class TekstLoadSaveTemplate {
 

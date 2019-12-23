@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//@author Eline
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 
 public class ExcelLezer implements LoadSave {
     private static final ExcelLezer SINGLE_INSTANCE = new ExcelLezer();

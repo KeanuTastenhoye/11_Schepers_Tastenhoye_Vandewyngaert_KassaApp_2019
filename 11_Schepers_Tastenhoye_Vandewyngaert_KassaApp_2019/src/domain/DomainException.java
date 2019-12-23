@@ -1,6 +1,8 @@
 package domain;
 
-//@author Phloy
+/**
+ * //@author Phloy
+ */
     public class DomainException extends Throwable {
         private Exception ex;
         private String str;

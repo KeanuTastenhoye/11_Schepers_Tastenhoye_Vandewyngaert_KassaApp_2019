@@ -1,5 +1,7 @@
 package domain;
-//@author
+/**
+ * //@author Eline
+ */
 public class KortingFactory {
 
 

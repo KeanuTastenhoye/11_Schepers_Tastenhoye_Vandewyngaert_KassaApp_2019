@@ -2,7 +2,9 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-//@author Eline
+/**
+ * //@author Eline
+ */
 public class KortingContext {
 
     private KortingStrategy kortingStrategy;

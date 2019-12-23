@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-//@author Phloy,Keanu,Eline
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 
 public class ArtikelDbInMemory implements ArtikelDbStrategy, Observable {
     private LoadSave strategy;

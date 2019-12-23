@@ -5,7 +5,9 @@ import jxl.read.biff.BiffException;
 
 import java.io.IOException;
 import java.util.List;
-//@author Phloy
+/**
+ * //@author Phloy
+ */
 
 public class FooterMetBericht extends KassabonDecorator {
     private KassabonAbstract kassabon;

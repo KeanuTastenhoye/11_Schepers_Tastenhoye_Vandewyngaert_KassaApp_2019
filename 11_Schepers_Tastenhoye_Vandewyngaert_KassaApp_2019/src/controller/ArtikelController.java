@@ -22,7 +22,9 @@ import jxl.read.biff.BiffException;
 import view.KassaTab;
 import view.KassaView;
 import view.KlantTab;
-
+/**
+ * //@author Phloy,Keanu,Eline
+ */
 public class ArtikelController {
     private final Service service;
     private int aantalVerkoopSessies;
@@ -41,7 +43,7 @@ public class ArtikelController {
     private Double teBetalenBedrag;
 
     private Stage stage;
-// @author Keanu,Eline,Phloy
+
     public ArtikelController() {
         service = new Service();
         aantalVerkoopSessies=0;

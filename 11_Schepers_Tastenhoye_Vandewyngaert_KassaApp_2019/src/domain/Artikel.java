@@ -4,7 +4,9 @@ import model.observer.Observable;
 import model.observer.Observer;
 
 import java.util.ArrayList;
-//@author Keanu
+/**
+ * //@author Phloy,Eline
+ */
 public class Artikel {
     private String artikelNr;
     private String artikelNaam;

@@ -7,7 +7,9 @@ import jxl.write.biff.RowsExceededException;
 
 import java.io.*;
 import java.util.*;
-//@author Phloy,Eline
+/**
+ * //@author Phloy,Eline
+ */
 
 public class TekstLezer extends TekstLoadSaveTemplate implements LoadSave {
 

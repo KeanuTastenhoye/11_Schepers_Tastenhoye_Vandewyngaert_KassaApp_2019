@@ -13,7 +13,9 @@ import view.*;
 import java.io.IOException;
 
 import jxl.read.biff.BiffException;
-// @author Keanu
+/**
+ * //@author Keanu
+ */
 public class Main extends Application {
 
 	private Service service = new Service();

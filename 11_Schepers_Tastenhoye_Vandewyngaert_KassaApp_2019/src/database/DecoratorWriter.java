@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Properties;
-//@author Phloy
+/**
+ * //@author Phloy
+ */
 
 public class DecoratorWriter {
     private Properties property;

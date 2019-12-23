@@ -1,5 +1,7 @@
 package database;
-//@author Keanu,Eline
+/**
+ * //@author Keanu,Eline
+ */
 
 public enum Methode {
     TEXT("Tekst", "database.TekstLezer"),

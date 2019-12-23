@@ -2,7 +2,9 @@ package domain;
 
 import database.LoadSave;
 import database.Methode;
-//@author Keanu
+/**
+ * //@author Keanu
+ */
 public class Factory {
     public static LoadSave maakMethode(String methodeNaam) {
         Methode methode = Methode.valueOf(methodeNaam);
