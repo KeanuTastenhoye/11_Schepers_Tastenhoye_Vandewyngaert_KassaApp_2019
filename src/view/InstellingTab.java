@@ -46,12 +46,13 @@ public class InstellingTab extends GridPane {
         excelButton.setToggleGroup(groep);
 
         Button opslag = new Button("Save");
-        Button reset = new Button("reset");
+        Button reset = new Button("Reset korting");
 
         this.add(tekstButton, 0, 2, 1, 1);
         this.add(excelButton, 0, 3, 1, 1);
         this.add(opslag, 0, 5, 1, 1);
         this.add(reset,1,5,1,1);
+
         //Korting
         this.add(new Label("Kies de korting: "), 0,7,2,1);
 
@@ -141,7 +142,6 @@ public class InstellingTab extends GridPane {
 
         this.add(kassabon, 0, 28, 1, 1);
 
-
         opslag.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -207,16 +207,7 @@ public class InstellingTab extends GridPane {
                 }else throw new IllegalArgumentException("Je hebt heelemaal geen drempelkorting aangeduid");
             }
         });
-        reset.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    kortingSchrijver.reset();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
         duursteBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -251,6 +242,17 @@ public class InstellingTab extends GridPane {
                 if (FooterDanku.isSelected())decoratorKeuzes.add("danku");
 
                 decoratorSchrijver.write(decoratorKeuzes, input);
+            }
+        });
+
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    kortingSchrijver.reset();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

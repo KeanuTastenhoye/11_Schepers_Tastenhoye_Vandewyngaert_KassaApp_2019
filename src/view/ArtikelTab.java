@@ -46,7 +46,7 @@ public class ArtikelTab extends GridPane implements Observer {
         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
         table.getSortOrder().add(artikelNaam);
 
-        this.add(table, 0, 1, 2, 6);
+        add(table, 0, 1, 2, 6);
     }
 
     @Override

@@ -58,14 +58,20 @@ public class ArtikelController {
     public void addVerkoopsessie(){aantalVerkoopSessies++;}
     public void resetVerkoopsessies(){aantalVerkoopSessies=0;}
     public int getAantalVerkoopSessies(){return aantalVerkoopSessies;}
-    public List<Artikel> getArtikels() throws BiffException, IOException { return service.getArtikels(); }
-
+    public List<Artikel> getArtikels() throws BiffException, IOException {
+        List<Artikel> artik = new ArrayList<>();
+        for (Artikel a: service.getArtikels()) {
+            if (!isInList(artik, a)) {
+                artik.add(a);
+            }
+        }
+        return artik;
+    }
     public List<Artikel> getOnHold() { return onHold; }
 
     public double getOnHoldPrijs() {
         double prijs=0;
-        for(Artikel a: onHold)
-        {
+        for(Artikel a: onHold) {
             prijs+=Double.parseDouble(a.getArtikelPrijs());
         }
         return prijs;
@@ -83,25 +89,37 @@ public class ArtikelController {
         }
         throw new IllegalArgumentException("Het artikel nummer bestaat niet");
     }
-    public boolean hasGroup(String groep)
-    {
-        for(Artikel a : artikels)
-        {
-            if(a.getArtikelGroep().equals(groep))
-            {
+
+    public boolean hasGroup(String groep) {
+        for(Artikel a : artikels) {
+            if(a.getArtikelGroep().equals(groep)) {
                 return true;
             }
         }
         return  false;
     }
 
-
     public boolean contains(List<Artikel> artikels, Artikel art){
         for (Artikel a:artikels) {
-            if(a.getArtikelNaam().equals(art.getArtikelNaam())) return false;
-            else if(a.getArtikelGroep().equals(art.getArtikelGroep())) return false;
+            if (a.getArtikelNaam().equals(art.getArtikelNaam())) return false;
+            else if (a.getArtikelGroep().equals(art.getArtikelGroep())) return false;
         }
         return true;
+    }
+
+    public boolean isInList(List<Artikel> artikels, Artikel art) {
+        boolean waarde = false;
+
+        if (!artikels.isEmpty()) {
+            for (Artikel a : artikels) {
+                if (a.getArtikelNr().equals(art.getArtikelNr())) {
+                    return true;
+                }
+                waarde = false;
+            }
+        }
+
+        return waarde;
     }
 
     /*

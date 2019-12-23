@@ -89,8 +89,7 @@ public class KassaTab extends GridPane implements Observer {
             public void handle(ActionEvent event) {
                 try {
                     System.out.println("verkoop sessies: "+artikelController.getAantalVerkoopSessies());;
-                    if(artikelController.getAantalVerkoopSessies()>3)
-                    {
+                    if (artikelController.getAantalVerkoopSessies()>3) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText("Error aantal verkoop sessies na on hold");
                         alert.setContentText("U moet eerst verder gaan met de verkoop sessie die on hold is gezet aangezien er al 3 mensen zijn gepasseerd!");
