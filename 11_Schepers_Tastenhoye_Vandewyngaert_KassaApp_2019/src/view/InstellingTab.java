@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 
 import database.PropertySchrijver;
 
+import java.io.FileNotFoundException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +46,12 @@ public class InstellingTab extends GridPane {
         excelButton.setToggleGroup(groep);
 
         Button opslag = new Button("Save");
+        Button reset = new Button("reset");
 
         this.add(tekstButton, 0, 2, 1, 1);
         this.add(excelButton, 0, 3, 1, 1);
         this.add(opslag, 0, 5, 1, 1);
-
+        this.add(reset,1,5,1,1);
         //Korting
         this.add(new Label("Kies de korting: "), 0,7,2,1);
 
@@ -205,7 +207,16 @@ public class InstellingTab extends GridPane {
                 }else throw new IllegalArgumentException("Je hebt heelemaal geen drempelkorting aangeduid");
             }
         });
-
+        reset.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    kortingSchrijver.reset();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         duursteBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {

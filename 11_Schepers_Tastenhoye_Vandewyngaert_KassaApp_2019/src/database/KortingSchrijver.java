@@ -2,10 +2,7 @@ package database;
 
 import domain.KortingEnum;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -31,6 +28,13 @@ public class KortingSchrijver {
             e.printStackTrace();
         }
     }
+    public void reset() throws FileNotFoundException {
+        File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+        PrintWriter writer = new PrintWriter(file);
+        writer.print("");
+        writer.close();
+    }
+
 
     public void write(KortingEnum categorie, String subCategorie, String percentage) {
         //try {

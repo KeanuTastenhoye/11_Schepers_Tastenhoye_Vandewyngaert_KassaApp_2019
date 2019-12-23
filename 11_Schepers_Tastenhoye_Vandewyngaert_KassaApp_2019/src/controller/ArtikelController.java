@@ -26,14 +26,14 @@ public class ArtikelController {
     private final Service service;
 
     private List<Artikel> artikels;
-    private List<Artikel> nieuweArtikels;
-    private List<Artikel> oudeArtikels;
+    //private List<Artikel> nieuweArtikels;
+    //private List<Artikel> oudeArtikels;
     private List<Artikel> onHold;
-    private List<Artikel> verkoopArtikels;
-    private List<Artikel> klantArtikels;
+    //private List<Artikel> verkoopArtikels;
+    //private List<Artikel> klantArtikels;
     private KortingLezer lezer;
-    private double prijs;
-    private double onHoldPrijs;
+    //private double prijs;
+    //private double onHoldPrijs;
 
     private Stage stage;
 
@@ -41,11 +41,11 @@ public class ArtikelController {
         service = new Service();
 
         artikels = new ArrayList<>();
-        nieuweArtikels = new ArrayList<>();
-        oudeArtikels = new ArrayList<>();
+        //nieuweArtikels = new ArrayList<>();
+        //oudeArtikels = new ArrayList<>();
         onHold = new ArrayList<>();
-        verkoopArtikels = new ArrayList<>();
-        klantArtikels = new ArrayList<>();
+        //verkoopArtikels = new ArrayList<>();
+        //klantArtikels = new ArrayList<>();
         lezer=new KortingLezer();
 
         this.stage = new Stage();
@@ -61,7 +61,12 @@ public class ArtikelController {
     public List<Artikel> getOnHold() { return onHold; }
 
     public double getOnHoldPrijs() {
-        return onHoldPrijs;
+        double prijs=0;
+        for(Artikel a: onHold)
+        {
+            prijs+=Double.parseDouble(a.getArtikelPrijs());
+        }
+        return prijs;
     }
 
     //Methodes verbonden met tabs
@@ -69,8 +74,8 @@ public class ArtikelController {
         for (Artikel a: getService().getArtikels()) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
-                verkoopArtikels.add(a);
-                System.out.println("Verk Artikels: " + verkoopArtikels);
+                //verkoopArtikels.add(a);
+                System.out.println("Verk Artikels: " + artikels.toString());
                 return artikels;
             }
         }
@@ -191,11 +196,13 @@ public class ArtikelController {
     }
 
     public List<Artikel> getAllScannedArtikels() {
-        return klantArtikels;
+        //return klantArtikels;
+        return artikels;
     }
 
     public List<Artikel> getAllScannedArtikelsv2() {
-        return verkoopArtikels;
+        //return verkoopArtikels;
+        return artikels;
     }
 
 
@@ -253,35 +260,59 @@ public class ArtikelController {
 
 
     public List<Artikel> getDeleteVerkoopArtikels(String artikelNr) throws BiffException, IOException {
-        oudeArtikels.clear();
+
+        /*oudeArtikels.clear();
         nieuweArtikels.clear();
         oudeArtikels.addAll(artikels);
         for (Artikel a: artikels) {
             if (!a.getArtikelNr().equals(artikelNr)) {
                 nieuweArtikels.add(a);
+
             } else {
                 oudeArtikels.remove(a);
+                return nieuweArtikels;
             }
         }
         artikels.clear();
         artikels.addAll(oudeArtikels);
-        return nieuweArtikels;
+        return nieuweArtikels;*/
+        for(Artikel a: artikels)
+        {
+            if(a.getArtikelNr().equals(artikelNr))
+            {
+                artikels.remove(a);
+                return artikels;
+            }
+        }
+        return artikels;
     }
 
     public double getVerkoopPrijs(String artikelNr) {
-        for (Artikel a: verkoopArtikels) {
+        /*for (Artikel a: verkoopArtikels) {
             if (a.getArtikelNr().equals(artikelNr)) {
                 prijs += Double.parseDouble(a.getArtikelPrijs());
                 return prijs - onHoldPrijs;
             }
         }
-        throw new IllegalArgumentException("Het artikel nummer bestaat niet");
+        throw new IllegalArgumentException("Het artikel nummer bestaat niet");*/
+        double prijs=0;
+        double onHoldPrijs=0;
+        if(artikels.isEmpty()){return prijs;}
+        for (Artikel a: artikels) {
+
+            prijs += Double.parseDouble(a.getArtikelPrijs());
+            //return prijs - onHoldPrijs;
+
+        }
+        return prijs;
+        //throw new IllegalArgumentException("Het artikel nummer bestaat niet");
     }
 
     public double getDeleteVerkoopPrijs(String artikelNr) {
-        try {
+        /*try {
             for (Artikel a: getArtikels()) {
                 if (a.getArtikelNr().equals(artikelNr)) {
+                    verkoopArtikels.remove(a);
                     prijs -= Double.parseDouble(a.getArtikelPrijs());
                     return prijs;
                 }
@@ -289,22 +320,28 @@ public class ArtikelController {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        throw new IllegalArgumentException("Het artikel nummer bestaat niet");
+        throw new IllegalArgumentException("Het artikel nummer bestaat niet");*/
+
+        return getVerkoopPrijs(artikelNr);
     }
 
     public void setOnHold() {
         onHold.addAll(artikels);
-        verkoopArtikels.removeAll(verkoopArtikels);
+        //verkoopArtikels.removeAll(verkoopArtikels);
+        artikels.removeAll(onHold);
     }
 
     public void setOnHoldPrijs() {
         for (Artikel a: onHold) {
-            onHoldPrijs += Double.parseDouble(a.getArtikelPrijs());
+            //onHoldPrijs += Double.parseDouble(a.getArtikelPrijs());
         }
     }
 
     public void clearOnHold() {
-        onHold.clear();
+        artikels.removeAll(artikels);
+        artikels.addAll(onHold);
+        onHold.removeAll(onHold);
+        //todo: changed this
     }
 
     public boolean correctNr(String artikelNr) {

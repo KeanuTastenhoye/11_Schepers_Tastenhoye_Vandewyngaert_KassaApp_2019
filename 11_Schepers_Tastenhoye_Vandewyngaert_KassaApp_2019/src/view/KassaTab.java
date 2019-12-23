@@ -154,8 +154,9 @@ public class KassaTab extends GridPane implements Observer {
                     table.getItems().clear();
                     bedragLabel.setText("");
                     table.setItems(artikelController.getOnHoldObservable());
-                    artikelController.clearOnHold();
                     bedragLabel.setText(Double.toString(artikelController.getOnHoldPrijs()));
+                    artikelController.clearOnHold();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
