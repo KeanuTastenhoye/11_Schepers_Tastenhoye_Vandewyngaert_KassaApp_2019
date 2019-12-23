@@ -55,7 +55,7 @@ public abstract class Kassabon extends KassabonAbstract {
 
         decorator += "---------------------------------------------------\n";
         //KORTING MOET ER NOG AF GETROKKEN WORDEN
-        decorator += "Betaald (incl korting)                        " + getTotaalPrijs(artList) + " EUR\n";
+        decorator += "Betaald (excl korting)                        " + controller.getAmountOfKorting() + " EUR\n";
         return decorator;
     }
 

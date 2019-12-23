@@ -20,8 +20,8 @@ public class KortingSchrijver {
             kortingEnum = categorie;
             property.setProperty("Categorie", kortingEnum.getOmschrijving());
             property.setProperty("Percentage", percentage);
-            //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-            File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+            File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+            //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
             OutputStream out = new FileOutputStream(file);
             property.store(out, "Properties file");
         } catch (Exception e) {
@@ -42,9 +42,9 @@ public class KortingSchrijver {
         property.setProperty("Categorie", kortingEnum.getOmschrijving());
         property.setProperty("SubCategorie", subCategorie);
         property.setProperty("Percentage", percentage);
-        kortingen.add(property.toString());
-        //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
-        File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019");
+        kortingen.add(property.get("Categorie")+", "+property.get("SubCategorie")+", "+property.get("Percentage"));
+        File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
+        //File file = new File("11_Schepers_Tastenhoye_Vandewyngaert_KassaApp_2019\\src\\bestanden\\kortingStrategieProperties");
         try {
             PrintWriter writer = new PrintWriter(file);
             for(String s: kortingen)
