@@ -74,6 +74,7 @@ public class KassaTab extends GridPane implements Observer {
         artikelPrijs.setCellValueFactory(new PropertyValueFactory("artikelPrijs"));
         artikelVoorraad.setCellValueFactory(new PropertyValueFactory("artikelVoorraad"));
 
+
         table = new TableView<String>();
         table.setPrefWidth(REMAINING);
         table.getColumns().addAll(artikelNr, artikelNaam, artikelGroep, artikelPrijs, artikelVoorraad);
@@ -104,6 +105,7 @@ public class KassaTab extends GridPane implements Observer {
                         alert.setContentText("Het artikel nummer dat U invoerde bestaat niet.");
                         alert.showAndWait();
                     } else {
+                        artikelCodeText.setText("");
                         table.setItems(artikelController.getVerkoopObservable(artikelNrke)); //hier wordt het artikel met de meegegeven code opgezocht in de lijst
                         totaalLabel.setVisible(true);
                         bedragLabel.setVisible(true);
@@ -121,6 +123,7 @@ public class KassaTab extends GridPane implements Observer {
             public void handle(ActionEvent event) {
                 try {
                     String artikelNrke = artikelCodeText.getText();
+                    artikelCodeText.setText("");
 
                     if (!artikelController.correctNr(artikelNrke)) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -149,6 +152,7 @@ public class KassaTab extends GridPane implements Observer {
                     artikelController.setOnHold();
                     artikelController.setOnHoldPrijs();
                     table.getItems().clear();
+                    artikelCodeText.setText("");
                     bedragLabel.setText("");
                 }
                 else {
@@ -226,18 +230,6 @@ public class KassaTab extends GridPane implements Observer {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    totaalLabel.setText("Totaal: ");
-                    totaalLabel.setVisible(false);
-                    bedragLabel.setText("");
-                    kortingTxt.setText("Korting: ");
-                    kortingTxt.setVisible(false);
-                    kortingLabel.setText("");
-                    versieringLabel.setText("--------------------------------------");
-                    versieringLabel.setVisible(false);
-                    eindTotaal.setText("Te betalen: ");
-                    eindTotaal.setVisible(false);
-                    eindLabel.setText("");
-
                     KassabonAbstract kassabon = new Kassabon(artikelController.getAmountOfKorting()) {};
                     String lijn;
                     String inputVeld = null;
@@ -302,6 +294,20 @@ public class KassaTab extends GridPane implements Observer {
                     }
 
                     System.out.println(kassabon.print(artikelController.getAllScannedArtikelsv2()));
+                    totaalLabel.setText("Totaal: ");
+                    totaalLabel.setVisible(false);
+                    bedragLabel.setText("");
+                    kortingTxt.setText("Korting: ");
+                    kortingTxt.setVisible(false);
+                    kortingLabel.setText("");
+                    versieringLabel.setText("--------------------------------------");
+                    versieringLabel.setVisible(false);
+                    eindTotaal.setText("Te betalen: ");
+                    eindTotaal.setVisible(false);
+                    eindLabel.setText("");
+                    artikelCodeText.setText("");
+                    table.getItems().clear();
+                    artikelController.emptyList();
 
                 } catch (BiffException e) {
                     e.printStackTrace();
@@ -314,7 +320,20 @@ public class KassaTab extends GridPane implements Observer {
         annuleren.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-           //code voor annuleren
+                totaalLabel.setText("Totaal: ");
+                totaalLabel.setVisible(false);
+                bedragLabel.setText("");
+                kortingTxt.setText("Korting: ");
+                kortingTxt.setVisible(false);
+                kortingLabel.setText("");
+                versieringLabel.setText("--------------------------------------");
+                versieringLabel.setVisible(false);
+                eindTotaal.setText("Te betalen: ");
+                eindTotaal.setVisible(false);
+                eindLabel.setText("");
+                artikelCodeText.setText("");
+                table.getItems().clear();
+                artikelController.emptyList();
             }
         });
     }

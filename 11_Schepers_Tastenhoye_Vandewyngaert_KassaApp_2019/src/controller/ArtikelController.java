@@ -409,6 +409,10 @@ public class ArtikelController {
         ArtikelDbInMemory.getInstance().notifyObservers(getKlantObservable());
     }
 
+    public void emptyList() {
+        artikels = new ArrayList<>();
+    }
+
     //Observables
     public ObservableList<Artikel> getArtikelObservable() throws BiffException, IOException {
         ObservableList<Artikel> artikels = FXCollections.observableArrayList(getArtikels());
