@@ -5,7 +5,7 @@ import jxl.read.biff.BiffException;
 
 import java.io.IOException;
 import java.util.List;
-
+//@author Phloy
 public class FooterKorting  extends KassabonDecorator {
     private KassabonAbstract kassabon;
     private  String text;

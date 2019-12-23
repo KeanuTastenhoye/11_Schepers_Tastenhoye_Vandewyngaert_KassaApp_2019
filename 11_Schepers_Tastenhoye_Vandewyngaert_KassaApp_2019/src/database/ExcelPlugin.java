@@ -11,6 +11,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+//@author Keanu
 
 public class ExcelPlugin {
 

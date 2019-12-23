@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import jxl.read.biff.BiffException;
 
 import java.io.IOException;
+//@author Keanu
 
 public class KlantView {
 	private Stage stage = new Stage();

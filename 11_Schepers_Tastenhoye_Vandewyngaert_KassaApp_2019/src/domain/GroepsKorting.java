@@ -1,7 +1,7 @@
 package domain;
 
 import javafx.scene.Group;
-
+//@author Eline
 public class GroepsKorting implements KortingStrategy {
 
     private int korting;

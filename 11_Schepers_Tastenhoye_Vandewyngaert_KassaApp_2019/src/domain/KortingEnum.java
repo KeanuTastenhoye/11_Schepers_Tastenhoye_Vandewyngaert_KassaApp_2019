@@ -1,5 +1,5 @@
 package domain;
-
+//@author Eline
 public enum KortingEnum {
 
     GROEP("groep","domain.GroepsKorting"),

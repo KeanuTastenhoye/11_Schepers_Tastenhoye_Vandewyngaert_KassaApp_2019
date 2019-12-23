@@ -1,5 +1,5 @@
 package domain;
-
+//@author Eline
 public class DrempelKorting implements KortingStrategy {
 
     private int kortingEUR,drempel;

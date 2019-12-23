@@ -5,6 +5,7 @@ import jxl.read.biff.BiffException;
 
 import java.io.IOException;
 import java.util.List;
+//@author Phloy
 
 public abstract class KassabonAbstract {
     String text ="";

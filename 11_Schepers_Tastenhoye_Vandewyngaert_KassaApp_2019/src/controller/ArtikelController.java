@@ -41,7 +41,7 @@ public class ArtikelController {
     private Double teBetalenBedrag;
 
     private Stage stage;
-
+// @author Keanu,Eline,Phloy
     public ArtikelController() {
         service = new Service();
         aantalVerkoopSessies=0;

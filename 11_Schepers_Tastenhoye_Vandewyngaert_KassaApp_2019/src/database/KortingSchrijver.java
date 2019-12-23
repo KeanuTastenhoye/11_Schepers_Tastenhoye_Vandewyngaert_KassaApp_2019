@@ -5,6 +5,7 @@ import domain.KortingEnum;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
+//@author Eline
 
 //hier wordt de korting keuze van de kassierster bijgehouden
 public class KortingSchrijver {

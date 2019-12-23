@@ -8,6 +8,7 @@ import jxl.write.WriteException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+//@author Phloy
 
 public class ArtikelDbContext {
 

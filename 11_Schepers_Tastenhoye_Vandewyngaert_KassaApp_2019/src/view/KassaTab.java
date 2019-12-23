@@ -25,6 +25,7 @@ import java.io.FileReader;
 import java.util.Arrays;
 
 import java.util.List;
+//@author Phloy,Keanu,Eline
 
 public class KassaTab extends GridPane implements Observer {
     private ArtikelController artikelController;

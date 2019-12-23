@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import domain.Artikel;
 
 import model.observer.Observer;
+//@author Phloy,Keanu,Eline
 
 public class KlantTab extends GridPane implements Observer {
 

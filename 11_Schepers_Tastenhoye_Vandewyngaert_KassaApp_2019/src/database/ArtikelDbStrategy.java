@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+//@author Keanu
 
 public interface ArtikelDbStrategy {
     ArrayList<Artikel> load(File file) throws IOException, BiffException;

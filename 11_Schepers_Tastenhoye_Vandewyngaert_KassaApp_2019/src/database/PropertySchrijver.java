@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 //hier wordt de keuze van de kassierster bijgehouden of zij de artikelen wil opslaan in tekst of excel
+//@author Eline
+
 public class PropertySchrijver {
     private Properties property;
     private Methode methode;
