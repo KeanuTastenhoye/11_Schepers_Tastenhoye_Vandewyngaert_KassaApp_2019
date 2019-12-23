@@ -24,7 +24,7 @@ import view.KlantTab;
 
 public class ArtikelController {
     private final Service service;
-
+    private int aantalVerkoopSessies;
     private List<Artikel> artikels;
     //private List<Artikel> nieuweArtikels;
     //private List<Artikel> oudeArtikels;
@@ -39,7 +39,7 @@ public class ArtikelController {
 
     public ArtikelController() {
         service = new Service();
-
+        aantalVerkoopSessies=0;
         artikels = new ArrayList<>();
         //nieuweArtikels = new ArrayList<>();
         //oudeArtikels = new ArrayList<>();
@@ -55,7 +55,9 @@ public class ArtikelController {
     public Service getService() {
         return this.service;
     }
-
+    public void addVerkoopsessie(){aantalVerkoopSessies++;}
+    public void resetVerkoopsessies(){aantalVerkoopSessies=0;}
+    public int getAantalVerkoopSessies(){return aantalVerkoopSessies;}
     public List<Artikel> getArtikels() throws BiffException, IOException { return service.getArtikels(); }
 
     public List<Artikel> getOnHold() { return onHold; }
