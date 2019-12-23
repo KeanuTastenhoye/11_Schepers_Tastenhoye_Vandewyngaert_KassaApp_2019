@@ -90,7 +90,6 @@ public class ArtikelController {
             if (a.getArtikelNr().equals(artikelNr)) {
                 artikels.add(a);
                 //verkoopArtikels.add(a);
-                System.out.println("Verk Artikels: " + artikels.toString());
                 return artikels;
             }
         }
